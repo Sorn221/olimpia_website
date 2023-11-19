@@ -28,7 +28,7 @@
         <nav class="navbar navbar-expand-lg fixed-top">
             <div class="container">
 
-                <a class="navbar-brand" href="index.html">OLIMPIA</a>
+                <a class="navbar-brand" href="index.php">OLIMPIA</a>
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -67,11 +67,11 @@
                 <div class="login-bar ml-lg-auto">
                     <ul class=" ml-lg-auto">
                         <li class="nav-item">
-                            <a href="#" class="nav-link smoothScroll">Sign in</a>
+                            <a href="sign-in.php" class="nav-link smoothScroll">Sign in</a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="#" class="nav-link smoothScroll">Sign up</a>
+                            <a href="sign-ups.php" class="nav-link smoothScroll">Sign up</a>
                         </li>
                     </ul>
 
