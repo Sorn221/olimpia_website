@@ -18,6 +18,17 @@
     <title>
         <?= htmlspecialchars($title) ?>
     </title>
+    <style>
+        .logged-name {
+            color: white;
+
+        }
+
+        .logged-name:hover {
+            color: #f13a11;
+
+        }
+    </style>
 </head>
 
 <body>
@@ -75,7 +86,7 @@
                         </li>
                     </ul>
 
-                    <span class="logged-name ">Имя вошедшего</span>
+                    <a href="profile.php"><span class="logged-name">Имя вошедшего</span></a>
 
                 </div>
             </div>

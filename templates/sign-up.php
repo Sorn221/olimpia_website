@@ -33,7 +33,7 @@
     }
 
     .registration-form button {
-        background-color: #d4802c;
+        background-color: #f13a11;
         color: #fff;
         padding: 10px;
         border: none;
