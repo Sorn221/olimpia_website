@@ -395,11 +395,36 @@
 
                         </form>
                     </div>
-
-                    <div class="modal-footer"></div>
-
                 </div>
+
+                <!-- FOOTER -->
+                <div class="modal-footer"></div>
+                <footer class="site-footer">
+                    <div class="container">
+                        <div class="row">
+
+                            <div class="ml-auto col-lg-4 col-md-5">
+                                <p class="copyright-text">Copyright &copy; 2023 URTK Co.
+
+                                    <br>Design: <a href="https://github.com/Sorn221">Sorn</a>
+                                </p>
+                            </div>
+
+                            <div class="d-flex justify-content-center mx-auto col-lg-5 col-md-7 col-12">
+                                <p class="mr-4">
+                                    <i class="fa fa-envelope-o mr-1"></i>
+                                    <a href="#">fomin.timofey.sistema@yandex.ru</a>
+                                </p>
+
+                                <p><i class="fa fa-phone mr-1"></i> +7(922)1889024</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </footer>
             </div>
+        </div>
+        </div>
         </div>
 
         <!-- SCRIPTS -->
