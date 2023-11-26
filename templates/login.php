@@ -45,8 +45,9 @@
     <div class="login-form">
         <h2>Авторизация</h2>
         <form action="#" method="post">
-            <label for="name">Имя: <sup>*</sup></label>
-            <input type="text" id="name" name="name" placeholder="Введите имя" required>
+            <label for="login">Логин: <sup>*</sup></label>
+            <input type="text" id="login" name="login" placeholder="Введите логин" value="<?= getPostVal('login'); ?>"
+                required>
 
             <label for="password">Пароль: <sup>*</sup></label>
             <input value="<?= getPostVal('password'); ?>" type="password" id="password" name="password"

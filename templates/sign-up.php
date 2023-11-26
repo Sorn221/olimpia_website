@@ -54,7 +54,12 @@
                 placeholder="Введите пароль" required>
 
             <label for="name">Имя: <sup>*</sup></label>
-            <input type="text" id="name" name="name" placeholder="Введите имя" required>
+            <input type="text" id="name" name="name" placeholder="Введите имя" value="<?= getPostVal('name'); ?>"
+                required>
+
+            <label for="login">Логин: <sup>*</sup></label>
+            <input type="text" id="login" name="login" placeholder="Введите логин" value="<?= getPostVal('login'); ?>"
+                required>
 
             <label for="message">Контактная информация: <sup>*</sup></label>
             <textarea id="message" name="message" rows="4"

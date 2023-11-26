@@ -1,6 +1,7 @@
 <?php
 require_once('helpers.php');
 require_once('functions.php');
+require_once('init.php');
 
 const MAX_NAME = 30;
 const MAX_EMAIL = 300;

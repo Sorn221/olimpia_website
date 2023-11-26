@@ -48,6 +48,18 @@
         cursor: pointer;
     }
 
+    .delete-button {
+        display: inline-block;
+
+        font-size: 16px;
+        text-align: center;
+        text-decoration: none;
+        background-color: #f13a11;
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
     /* Стили для разделителя */
     .separator {
         border-top: 1px solid #ccc;
@@ -74,6 +86,7 @@
             <div class="profile">
                 <!-- Базовая информация о пользователе -->
                 <div class="profile-info">
+                    <h2>Вы вошли как администратор</h2>
                     <h6>Имя пользователя:</h6>
                     <span>
                         <?= $user_name ?><span>
@@ -81,26 +94,22 @@
                             <span>
                                 <?= $user_contact_message ?><span>
                 </div>
-                <!-- Пользовательский функционал (для обычного пользователя) -->
-
-
 
                 <!-- Админский функционал (для администратора) -->
                 <div class="admin-functionalities">
-                    <h2>Ваши абонементы и тренирвоки</h2>
+
+                    <p>Административные функции:</p>
+                </div>
+                <!-- Разделитель между блоками -->
+                <div class="separator"></div>
+                <div class="admin-functionalities">
+                    <h6>Сотрудники:</h6>
                     <ul>
-                        <li>
-                            Абонемент на год
-                        </li>
-                        <li>
-                            Тренирвока по Боксу | Тренер
-                        </li>
+                        <li>Имя | Должность <button class="delete-button">Удалить</button></li>
                     </ul>
+                    <a href="#"><button class="button">Добавить сотрудника</button></a>
                 </div>
             </div>
-
-            <!-- Разделитель между блоками -->
-            <div class="separator"></div>
         </div>
     </body>
 </main>
