@@ -76,18 +76,22 @@
                     </ul>
                 </div>
                 <div class="login-bar ml-lg-auto">
-                    <ul class=" ml-lg-auto">
-                        <li class="nav-item">
-                            <a href="sign-in.php" class="nav-link smoothScroll">Sign in</a>
-                        </li>
 
-                        <li class="nav-item">
-                            <a href="sign-ups.php" class="nav-link smoothScroll">Sign up</a>
-                        </li>
-                    </ul>
+                    <?php if (isset($_SESSION['is_auth']) && $_SESSION['is_auth']): ?>
+                        <a href="profile.php"><span class="logged-name">
+                                <?= htmlspecialchars($_SESSION['username']) ?>
+                            </span></a>
+                    <?php else: ?>
+                        <ul class=" ml-lg-auto">
+                            <li class="nav-item">
+                                <a href="sign-in.php" class="nav-link smoothScroll">Sign in</a>
+                            </li>
 
-                    <a href="profile.php"><span class="logged-name">Имя вошедшего</span></a>
-
+                            <li class="nav-item">
+                                <a href="sign-ups.php" class="nav-link smoothScroll">Sign up</a>
+                            </li>
+                        </ul>
+                    <?php endif; ?>
                 </div>
             </div>
         </nav>

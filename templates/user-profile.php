@@ -1,65 +1,104 @@
 <style>
+    /* Обнуляем отступы и поля у body */
     body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
         margin: 0;
         padding: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
     }
 
+    /* Устанавливаем фон и шрифт для всей страницы */
+    body {
+        background-color: #f4f4f4;
+        font-family: Arial, sans-serif;
+    }
+
+    /* Задаем стили для контейнера профиля */
     .profile-container {
-        background-color: #fff;
+        max-width: 1200px;
+        margin: 0 auto;
         padding: 20px;
+    }
+
+    /* Стили для основного блока профиля */
+    .profile {
+        background-color: #fff;
         border-radius: 8px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        width: 400px;
-    }
-
-    .profile-info {
+        padding: 20px;
         margin-bottom: 20px;
     }
 
-    .profile-info h2 {
-        margin-bottom: 10px;
+    /* Стили для админского функционала */
+    .admin-functionalities {
+        background-color: #e6e6e6;
+        border-radius: 8px;
+        padding: 15 15 15 0px;
+        margin-top: 20px;
     }
 
-    .profile-info p {
-        margin: 0;
+    /* Стили для кнопок */
+    .button {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        text-align: center;
+        text-decoration: none;
+        background-color: #f13a11;
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
     }
 
-    .subscriptions {
-        list-style: none;
-        padding: 0;
+    /* Стили для разделителя */
+    .separator {
+        border-top: 1px solid #ccc;
+        margin: 20px 0;
     }
 
-    .subscription-item {
-        border-bottom: 1px solid #ccc;
-        padding: 10px 0;
+    .profile-info {
+        margin-top: 100px;
+        margin-bottom: 20px;
     }
 
     h6 {
         color: black;
     }
+
+    .profile-info p {
+        margin: 0;
+    }
 </style>
 <main>
-    <div class="profile-container">
-        <div class="profile-info">
-            <h6>Имя пользователя</h6>
-            <span>
-                <?= $user_name ?><span>
-                    <p>Контактная информация:</p>
-                    <span>
-                        <?= $user_contact_message ?><span>
-        </div>
 
-        <h6>Приобретенные абонементы/тренировки:</h6>
-        <ul class="subscriptions">
-            <li class="subscription-item">Абонемент на год</li>
-            <li class="subscription-item">Персональные тренировки (последняя тренировка 01.01.2023)</li>
-            <!-- Добавьте здесь дополнительные абонементы или тренировки -->
-        </ul>
-    </div>
+    <body>
+        <div class="profile-container">
+            <div class="profile">
+                <!-- Базовая информация о пользователе -->
+                <div class="profile-info">
+                    <h6>Имя пользователя:</h6>
+                    <span>
+                        <?= $user_name ?><span>
+                            <h6>Контактная информация:</h6>
+                            <span>
+                                <?= $user_contact_message ?><span>
+                </div>
+                <!-- Пользовательский функционал (для обычного пользователя) -->
+
+
+
+                <!-- Админский функционал (для администратора) -->
+                <div class="admin-functionalities">
+                    <h6>Вы вошли как администратор</h6>
+                    <p>Административные функции</p>
+                    <a href="#"><button class="button">Добавить сотрудника</button></a>
+                    <button class="button">Редактировать сотрудника</button>
+                    <button class="button">Удалить сотрудника</button>
+                </div>
+            </div>
+
+            <!-- Разделитель между блоками -->
+            <div class="separator"></div>
+
+            <!-- Другие блоки информации о профиле могут быть добавлены здесь -->
+        </div>
+    </body>
 </main>
