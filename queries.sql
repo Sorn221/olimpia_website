@@ -1,3 +1,5 @@
+--Запросы для заполнения бд
+
 -- Добавление примерных данных в таблицу "Клиенты"
 INSERT INTO Clients (ClientName, Email, ClientLogin, ClientPassword, Contact) VALUES
     ('Иван Иванов', 'ivan@example.com', 'ivan123', 'ivanpass', '123-456-789'),
@@ -39,3 +41,5 @@ INSERT INTO ClientWorkouts (ClientID, WorkoutID, BookingDate) VALUES
     (1, 1, '2023-11-27 07:30:00'),
     (2, 2, '2023-11-28 09:00:00'),
     (3, 3, '2023-11-29 17:30:00');
+
+--Запросы для функций

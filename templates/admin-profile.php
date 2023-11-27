@@ -105,9 +105,9 @@
                 <div class="admin-functionalities">
                     <h6>Сотрудники:</h6>
                     <ul>
-                        <li>Имя | Должность <button class="delete-button">Удалить</button></li>
+                        <li>Имя | Должность | Email <button class="delete-button">Удалить</button></li>
                     </ul>
-                    <a href="#"><button class="button">Добавить сотрудника</button></a>
+                    <a href="admin-create.php"><button class="button">Добавить сотрудника</button></a>
                 </div>
             </div>
         </div>
