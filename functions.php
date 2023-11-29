@@ -24,10 +24,10 @@ function add_client(string $name, string $email,string $login, string $password,
     $stmt = mysqli_prepare($con, $sql);
     mysqli_stmt_bind_param($stmt, 'sssss', 
         $name, 
-        $email, 
+        $email,
+        $login, 
         $temp_password, 
-        $contact_info, 
-        $login
+        $contact_info  
     );
     mysqli_stmt_execute($stmt);
     return $con->insert_id;
@@ -86,6 +86,17 @@ function get_client_by_login(mysqli $con, string $login): array {
 
     return mysqli_fetch_assoc(mysqli_stmt_get_result($prepare_values)) ?? [];
 }
+function get_client_by_id(mysqli $con, int $client_id)
+{
+    $sql = 'SELECT * FROM `Clients`
+             WHERE `ClientID` = ?';
+    $prepare_values = mysqli_prepare($con, $sql);
+
+    mysqli_stmt_bind_param($prepare_values, 'i', $client_id);
+    mysqli_stmt_execute($prepare_values);
+
+    return mysqli_fetch_assoc(mysqli_stmt_get_result($prepare_values)) ?? [];
+}
 // тренера
 /**
  * Возвращает список тренеров
@@ -112,11 +123,29 @@ function get_admins(mysqli $con): array
     return mysqli_fetch_all(mysqli_query($con, $sql), MYSQLI_ASSOC);
 }
 
-// тренировки для конкретного пользователя
-function get_сlient_abonement(mysqli $con, int $client_id): array
+// абонементы для конкретного пользователя
+function get_сlient_abonement(mysqli $con, int $client_id): array 
 {
-    $sql = "SELECT * FROM ClientAbonement WHERE ClientID == ?";
-    return mysqli_fetch_all(mysqli_query($con, $sql), MYSQLI_ASSOC);
+    $sql = 'SELECT `ClientAbonement`.*,`Abonement`.* 
+            FROM `ClientAbonement` INNER JOIN `Abonement` 
+            ON `ClientAbonement`.`AbonementID` = `Abonement`.`AbonementID`
+            WHERE `ClientID` = ?';
+    $prepare_values = mysqli_prepare($con, $sql);
+    mysqli_stmt_bind_param($prepare_values, 'i', $client_id);
+    mysqli_stmt_execute($prepare_values);
+    return mysqli_fetch_all(mysqli_stmt_get_result($prepare_values), MYSQLI_ASSOC) ?? [];
 }
 
-// абонементы для конкретного пользователя
+// тренировки для конкретного пользователя
+
+function get_сlient_trainers(mysqli $con, int $client_id): array 
+{
+    $sql = 'SELECT `ClientWorkouts`.*,`Workouts`.*
+            FROM `ClientWorkouts` INNER JOIN `Workouts` 
+            ON `ClientWorkouts`.`WorkoutID` = `Workouts`.`WorkoutID`
+            WHERE `ClientID` = ?';
+    $prepare_values = mysqli_prepare($con, $sql);
+    mysqli_stmt_bind_param($prepare_values, 'i', $client_id);
+    mysqli_stmt_execute($prepare_values);
+    return mysqli_fetch_all(mysqli_stmt_get_result($prepare_values), MYSQLI_ASSOC) ?? [];
+}

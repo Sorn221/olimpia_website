@@ -85,14 +85,24 @@
 <main>
     <div class="login-form">
         <h2>Авторизация</h2>
-        <form action="#" method="post">
-            <label for="login">Логин: <sup>*</sup></label>
-            <input type="text" id="login" name="login" placeholder="Введите логин" value="<?= getPostVal('login'); ?>"
-                required>
+        <form action="sign-in.php" method="post">
+            <div class="<?php if (isset($errors['login'])): ?>form__item--invalid<?php endif; ?>">
+                <label for="login">Логин: <sup>*</sup></label>
+                <input type="text" id="login" name="login" placeholder="Введите логин" value="<?= getPostVal('login'); ?>"
+                    >
+                <span class="form__error">
+                    <?= $errors['login'] ?>
+                </span>
+            </div>
 
-            <label for="password">Пароль: <sup>*</sup></label>
-            <input value="<?= getPostVal('password'); ?>" type="password" id="password" name="password"
-                placeholder="Введите пароль" required>
+            <div class="<?php if (isset($errors['password'])): ?>form__item--invalid<?php endif; ?>">
+                <label for="password">Пароль: <sup>*</sup></label>
+                <input value="<?= getPostVal('password'); ?>" type="password" id="password" name="password"
+                    placeholder="Введите пароль" >
+                <span class="form__error">
+                        <?= $errors['password'] ?>
+                </span> 
+            </div>
 
             <button type="submit">Войти</button>
         </form>

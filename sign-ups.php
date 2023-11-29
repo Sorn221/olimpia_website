@@ -73,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         $login = $_POST['login'];
         $message = $_POST['message'];
         add_client($name, $email, $login, $password, $message, $con);
-        header('Location: /sign-in.php');
+        header('Location: /olimpia/olimpia_website/sign-in.php');
     }
     else{
 

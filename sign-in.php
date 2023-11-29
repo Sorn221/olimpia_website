@@ -23,6 +23,7 @@ else
             'password' => 'Введите пароль'
         ];
 
+        //проверка на пустые поля
         foreach($required_fields as $key => $value) 
         {
             if (empty($_POST[$key])) 
@@ -30,15 +31,17 @@ else
                 $errors[$key] = $value;
             }
         }
+        //проверка на существование логина
         if(empty(get_client_by_login($con, $_POST['login'])))
         {
             $errors['login'] = 'Неверный логин';
         }
 
+        //проверка введенного пароля
         if (!isset($errors['login']) && !isset($errors['password'])) {
             $user = get_client_by_login($con, $_POST['login']);
 
-            if (empty($user) || !password_verify($_POST['password'], $user['password'])) 
+            if (empty($user) || !password_verify($_POST['password'], $user['ClientPassword'])) 
             {
                 $errors['password'] = 'Неправильный пароль';
             }
@@ -48,15 +51,19 @@ else
             if (!$errors) 
             {
                 session_start();
-                $_SESSION['username'] = $user['name'];
-                $_SESSION['user_id'] = $user['id'];
-                header('Location: /index.php');
+                $_SESSION['username'] = $user['ClientName'];
+                $_SESSION['user_id'] = $user['ClientID'];
+                header('Location: /olimpia/olimpia_website/index.php');
                 exit;
             }
         }
     }
     //отрисовка
-    $page_content = include_template('login.php');
-    $layout = include_template('layout.php', ['title' => 'Авторизация', 'content' => $page_content]);
+    $page_content = include_template('login.php',['errors' => $errors]);
+    $layout = include_template('layout.php', 
+    [
+        'title' => 'Авторизация', 
+        'content' => $page_content
+    ]);
     print $layout;
 }

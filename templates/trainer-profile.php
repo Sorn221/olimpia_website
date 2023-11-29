@@ -79,40 +79,17 @@
                         <?= $user_name ?><span>
                             <h6>Контактная информация:</h6>
                             <span>
-                                <?= $user_contact_message['Contact'] ?><span>
+                                <?= $user_contact_message ?><span>
                 </div>
-                <div class="separator"></div>
-                <!-- Пользовательский функционал (для обычного пользователя) -->
+                <!-- Пользовательский функционал (для тренера) -->
 
                 <div class="admin-functionalities">
-                    <h2>Ваши абонементы </h2>
-                    <?php if (isset($abonements)): ?>
-                        <ul>
-                            <?php foreach($abonements as $item): ?>
-                                <li>
-                                    <?= $item["Type"]?> | Цена: <?= $item["Price"]?> | Действителен <?= $item["ValidDays"]?> дней | Дата покупки: <?= $item["PurchaseDate"]?>
-                                </li>
-                            <?php endforeach; ?>
-                        </ul>
-                    <?php else : ?>
-                        <p>Вы еще не покупали абонементы</p>
-                    <?php endif; ?>
-                </div>
-                <!-- Разделитель между блоками -->
-                <div class="separator"></div>
-                <div class="admin-functionalities">
                     <h2>Ваши тренировки </h2>
-                    <?php if (isset($abonements)): ?>
-                        <ul>
-                            <?php foreach($trainers as $item): ?>
-                                <li>
-                                    <?= $item["Type"]?> | Цена: <?= $item["Price"]?> |              Дата покупки: <?= $item["BookingDate"]?>
-                                </li>
-                            <?php endforeach; ?>
-                        </ul>
-                    <?php else : ?>
-                        <p>Вы еще не покупали тренировки</p>
-                    <?php endif; ?>
+                    <ul>
+                        <li>
+                            
+                        </li>
+                    </ul>
                 </div>
             </div>
 
