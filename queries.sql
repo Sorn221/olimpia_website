@@ -1,4 +1,4 @@
---Запросы для заполнения бд
+-- Запросы для заполнения бд
 
 -- Добавление примерных данных в таблицу "Клиенты"
 INSERT INTO Clients (ClientName, Email, ClientLogin, ClientPassword, Contact) VALUES
@@ -6,23 +6,19 @@ INSERT INTO Clients (ClientName, Email, ClientLogin, ClientPassword, Contact) VA
     ('Мария Петрова', 'maria@example.com', 'maria456', 'password123', '987-654-321'),
     ('Алексей Сидоров', 'alex@example.com', 'alex87', 'securepass', '555-123-789');
 
--- Добавление примерных данных в таблицу "Админы"
-INSERT INTO Admins (AdminName, Email, AdminLogin, AdminPassword) VALUES
-    ('Администратор 1', 'admin1@example.com', 'admin1', 'adminpass1'),
-    ('Администратор 2', 'admin2@example.com', 'admin2', 'adminpass2'),
-    ('Администратор 3', 'admin3@example.com', 'admin3', 'adminpass3');
+INSERT INTO Admins (Name, Email, AdminLogin, Password) VALUES 
+    ('Администратор 1', 'admin1@example.com', 'admin1', '$2y$10$fxzjVzulN3oHdkAcjfmFXOdm1.c0yoP8/dPSdgnxgIi238vnm79Ia');
+-- пароль = adminpass1
 
 -- Добавление примерных данных в таблицу "Тренера"
-INSERT INTO Trainers (TrainerName, Email, PhoneNumber) VALUES
-    ('Александр Тренеров', 'trainer1@example.com', '111-111-111'),
-    ('Ольга Кузнецова', 'trainer2@example.com', '222-222-222'),
-    ('Сергей Иванов', 'trainer3@example.com', '333-333-333');
-
+INSERT INTO Trainers (Name, Email, PhoneNumber, TrainerLogin, Password) VALUES 
+('Александр Тренеров', 'trainer1@example.com', '111-111-111', 'train1', '$2y$10$8RpnzjL4K42.v99rX2iqnOZmpdHYrcxskTj/ids3q7GowKHdVJFVq');
+-- пароль = train1
 -- Добавление примерных данных в таблицу "Тренировки"
 INSERT INTO Workouts (Type, TrainerID, Price) VALUES
     ('Кардио', 1, 150),
-    ('Силовые тренировки', 2, 200),
-    ('Бокс', 3, 120);
+    ('Силовые тренировки', 1, 200),
+    ('Бокс', 1, 120);
 
 -- Добавление примерных данных в таблицу "Абонементы"
 INSERT INTO Abonement (Type, Price, ValidDays) VALUES
@@ -39,7 +35,6 @@ INSERT INTO ClientAbonement (ClientID, AbonementID, PurchaseDate) VALUES
 -- Добавление примерных данных в таблицу "ClientWorkouts"
 INSERT INTO ClientWorkouts (ClientID, WorkoutID, BookingDate) VALUES
     (1, 1, '2023-11-27 07:30:00'),
-    (2, 2, '2023-11-28 09:00:00'),
-    (3, 3, '2023-11-29 17:30:00');
+    (1, 1, '2023-11-28 09:00:00'),
+    (1, 1, '2023-11-29 17:30:00');
 
---Запросы для функций

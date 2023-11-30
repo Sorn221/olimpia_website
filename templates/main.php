@@ -59,11 +59,11 @@
                                 <strong class="mt-3 d-block" data-aos="fade-up" data-aos-delay="700">Понедельник -
                                     Пятница</strong>
 
-                                <p data-aos="fade-up" data-aos-delay="800">7:00 AM - 10:00 PM</p>
+                                <p data-aos="fade-up" data-aos-delay="800">7:00 - 22:00</p>
 
                                 <strong class="mt-3 d-block" data-aos="fade-up" data-aos-delay="700">Суббота</strong>
 
-                                <p data-aos="fade-up" data-aos-delay="800">6:00 AM - 4:00 PM</p>
+                                <p data-aos="fade-up" data-aos-delay="800">6:00 - 20:00</p>
 
                                 <strong class="d-block" data-aos="fade-up" data-aos-delay="600">Воскресенье :
                                     Закрыто</strong>

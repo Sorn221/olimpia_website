@@ -90,25 +90,44 @@
                     <h6>Имя пользователя:</h6>
                     <span>
                         <?= $user_name ?><span>
-                            <h6>Контактная информация:</h6>
-                            <span>
-                                <?= $user_contact_message ?><span>
+
                 </div>
 
                 <!-- Админский функционал (для администратора) -->
                 <div class="admin-functionalities">
 
-                    <p>Административные функции:</p>
+                    <h2>Административные функции:</h2>
                 </div>
                 <!-- Разделитель между блоками -->
                 <div class="separator"></div>
-                <div class="admin-functionalities">
-                    <h6>Сотрудники:</h6>
-                    <ul>
-                        <li>Имя | Должность | Email <button class="delete-button">Удалить</button></li>
-                    </ul>
-                    <a href="admin-create.php"><button class="button">Добавить сотрудника</button></a>
-                </div>
+                    <div class="admin-functionalities">
+                        <h6>Тренера: </h6>
+                        <?php if (!empty($trainers)): ?>
+                            <ul>
+                                <?php foreach ($trainers as $trainer): ?>
+                                    <li>Имя: <?=$trainer['Name'] ?> | Email: <?=$trainer['Email'] ?> | Номер: <?=$trainer['PhoneNumber'] ?> | Логин: <?=$trainer['TrainerLogin'] ?> | <button class="delete-button">Удалить</button></li>
+                                <?php endforeach; ?>
+                            </ul>
+                        <?php else : ?>
+                            <p>Список сотрудников-тренеров пуст</p>
+                        <?php endif; ?>
+                        <a href="admin-create.php"><button class="button">Добавить сотрудника</button></a>
+                    </div>
+                <div class="separator"></div>
+                    <div class="admin-functionalities">
+                        <h6>Админы: </h6>
+                        <?php if (!empty($admins)): ?>
+                            <ul>
+                                <?php foreach ($admins as $admin): ?>
+                                    <li>Имя: <?=$admin['Name'] ?> | Email: <?=$admin['Email'] ?> | Логин:  <?=$admin['AdminLogin'] ?>|  <button class="delete-button">Удалить</button></li>
+                                <?php endforeach; ?>   
+                            </ul>
+                        <?php else : ?>
+                            <p>Список сотрудников-админов пуст</p>
+                        <?php endif; ?>
+                        <a href="admin-create.php"><button class="button">Добавить сотрудника</button></a>
+                    </div>
+                    
             </div>
         </div>
     </body>

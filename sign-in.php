@@ -32,16 +32,34 @@ else
             }
         }
         //проверка на существование логина
-        if(empty(get_client_by_login($con, $_POST['login'])))
+        //проверка кто зашел админ, клиент или тренер
+        //и запись информации
+        if(empty(get_client_by_login($con, $_POST['login'])) && empty(get_trainer_by_login($con, $_POST['login'])) && empty(get_admin_by_login($con, $_POST['login'])))
         {
             $errors['login'] = 'Неверный логин';
         }
-
+        
+        
         //проверка введенного пароля
         if (!isset($errors['login']) && !isset($errors['password'])) {
-            $user = get_client_by_login($con, $_POST['login']);
+            
+            if(!empty(get_client_by_login($con, $_POST['login'])))
+            {
+                $user =  get_client_by_login($con, $_POST['login']);
+                $_SESSION['type'] = 'client';
+            }
+            elseif(!empty(get_admin_by_login($con, $_POST['login'])))
+            {
+                $user =  get_admin_by_login($con, $_POST['login']);
+                $_SESSION['type'] = 'admin';
+            }
+            elseif(!empty(get_trainer_by_login($con, $_POST['login'])))
+            {
+                $user =  get_trainer_by_login($con, $_POST['login']);
+                $_SESSION['type'] = 'trainer';
+            }
 
-            if (empty($user) || !password_verify($_POST['password'], $user['ClientPassword'])) 
+            if (empty($user) || !password_verify($_POST['password'], $user['Password'])) 
             {
                 $errors['password'] = 'Неправильный пароль';
             }
@@ -51,14 +69,15 @@ else
             if (!$errors) 
             {
                 session_start();
-                $_SESSION['username'] = $user['ClientName'];
-                $_SESSION['user_id'] = $user['ClientID'];
+                $_SESSION['username'] = $user['Name'];
+                $_SESSION['user_id'] = $user['ID'];
                 header('Location: /olimpia/olimpia_website/index.php');
                 exit;
             }
         }
     }
     //отрисовка
+    
     $page_content = include_template('login.php',['errors' => $errors]);
     $layout = include_template('layout.php', 
     [

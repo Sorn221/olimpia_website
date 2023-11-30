@@ -19,7 +19,7 @@ function getPostVal($name): string
 function add_client(string $name, string $email,string $login, string $password, string $contact_info,  mysqli $con): int
 {
     $temp_password = password_hash($password, PASSWORD_DEFAULT);
-    $sql = "INSERT INTO Clients(`ClientName`, `Email`, `ClientLogin`, `ClientPassword`,`Contact`)
+    $sql = "INSERT INTO Clients(`Name`, `Email`, `ClientLogin`, `Password`,`Contact`)
             VALUES(?,?,?,?,?);";
     $stmt = mysqli_prepare($con, $sql);
     mysqli_stmt_bind_param($stmt, 'sssss', 
@@ -32,13 +32,6 @@ function add_client(string $name, string $email,string $login, string $password,
     mysqli_stmt_execute($stmt);
     return $con->insert_id;
 }
-// тренера
-// админы
-// удаление из бд
-
-// чтение из бд
-
-// клиенты
 /**
  * Возвращает список пользователей
  * @param mysqli $con подключение к базе
@@ -68,6 +61,32 @@ function get_client_by_email(mysqli $con, string $email): array {
 
     return mysqli_fetch_assoc(mysqli_stmt_get_result($prepare_values)) ?? [];
 }
+// абонементы для конкретного пользователя
+function get_сlient_abonement(mysqli $con, int $client_id): array 
+{
+    $sql = 'SELECT `ClientAbonement`.*,`Abonement`.* 
+            FROM `ClientAbonement` INNER JOIN `Abonement` 
+            ON `ClientAbonement`.`AbonementID` = `Abonement`.`ID`
+            WHERE `ID` = ?';
+    $prepare_values = mysqli_prepare($con, $sql);
+    mysqli_stmt_bind_param($prepare_values, 'i', $client_id);
+    mysqli_stmt_execute($prepare_values);
+    return mysqli_fetch_all(mysqli_stmt_get_result($prepare_values), MYSQLI_ASSOC) ?? [];
+}
+
+// тренировки для конкретного пользователя
+
+function get_сlient_trainers(mysqli $con, int $client_id): array 
+{
+    $sql = 'SELECT `ClientWorkouts`.*,`Workouts`.*
+            FROM `ClientWorkouts` INNER JOIN `Workouts` 
+            ON `ClientWorkouts`.`WorkoutID` = `Workouts`.`ID`
+            WHERE `ID` = ?';
+    $prepare_values = mysqli_prepare($con, $sql);
+    mysqli_stmt_bind_param($prepare_values, 'i', $client_id);
+    mysqli_stmt_execute($prepare_values);
+    return mysqli_fetch_all(mysqli_stmt_get_result($prepare_values), MYSQLI_ASSOC) ?? [];
+}
 /**
  * Выбирает пользователя из базы данных по его логину
  *
@@ -86,10 +105,18 @@ function get_client_by_login(mysqli $con, string $login): array {
 
     return mysqli_fetch_assoc(mysqli_stmt_get_result($prepare_values)) ?? [];
 }
+/**
+ * Выбирает пользователя из базы данных по его id
+ *
+ * @param mysqli $con соединение с базой данных
+ * @param string $client_id id пользователя
+ *
+ * @return array данные пользователя
+ */
 function get_client_by_id(mysqli $con, int $client_id)
 {
     $sql = 'SELECT * FROM `Clients`
-             WHERE `ClientID` = ?';
+             WHERE `ID` = ?';
     $prepare_values = mysqli_prepare($con, $sql);
 
     mysqli_stmt_bind_param($prepare_values, 'i', $client_id);
@@ -97,17 +124,98 @@ function get_client_by_id(mysqli $con, int $client_id)
 
     return mysqli_fetch_assoc(mysqli_stmt_get_result($prepare_values)) ?? [];
 }
+
+
+
 // тренера
 /**
  * Возвращает список тренеров
  * @param mysqli $con подключение к базе
  *
- * @return array список пользователей 
+ * @return array список тренеров 
  */
-function get_treners(mysqli $con): array
+function get_trainers(mysqli $con): array
 {
     $sql = "SELECT * FROM Trainers";
     return mysqli_fetch_all(mysqli_query($con, $sql), MYSQLI_ASSOC);
+}
+/**
+ * Выбирает тренера из базы данных по его логину
+ *
+ * @param mysqli $con соединение с базой данных
+ * @param string $login логин тренера
+ *
+ * @return array данные тренера
+ */
+function get_trainer_by_login(mysqli $con, string $login): array {
+    $sql = 'SELECT * FROM `Trainers`
+            WHERE `TrainerLogin` = ?';
+    $prepare_values = mysqli_prepare($con, $sql);
+
+    mysqli_stmt_bind_param($prepare_values, 's', $login);
+    mysqli_stmt_execute($prepare_values);
+
+    return mysqli_fetch_assoc(mysqli_stmt_get_result($prepare_values)) ?? [];
+}
+/**
+ * Выбирает тренера из базы данных по его id
+ *
+ * @param mysqli $con соединение с базой данных
+ * @param string $trener_id id тренера
+ *
+ * @return array данные тренера
+ */
+function get_trener_by_id(mysqli $con, int $trener_id)
+{
+    $sql = 'SELECT * FROM `Trainers`
+             WHERE `ID` = ?';
+    $prepare_values = mysqli_prepare($con, $sql);
+
+    mysqli_stmt_bind_param($prepare_values, 'i', $trener_id);
+    mysqli_stmt_execute($prepare_values);
+
+    return mysqli_fetch_assoc(mysqli_stmt_get_result($prepare_values)) ?? [];
+}
+/**
+ * Выбирает тренеровки которые ведет конкретный тренер из базы данных по его id
+ *
+ * @param mysqli $con соединение с базой данных
+ * @param string $trener_id id тренера
+ *
+ * @return array данные тренирвоки
+ */
+function get_trener_trains(mysqli $con, int $trener_id)
+{
+    $sql = 'SELECT * FROM `Workouts`
+            WHERE `TrainerID` = ?';    
+    $prepare_values = mysqli_prepare($con, $sql);
+
+    mysqli_stmt_bind_param($prepare_values, 'i', $trener_id);
+    mysqli_stmt_execute($prepare_values);
+
+    return mysqli_fetch_all(mysqli_stmt_get_result($prepare_values), MYSQLI_ASSOC) ?? [];
+}
+/**
+ * Выбирает историю персональных тренировок для конкретного тренера из базы данных по его id
+ *
+ * @param mysqli $con соединение с базой данных
+ * @param string $trener_id id тренера
+ *
+ * @return array история тренировок
+ */
+function get_trains_story(mysqli $con, int $trener_id)
+{
+    $sql = 'SELECT `ClientWorkouts`.`BookingDate`, `Clients`.`Name` AS ClientName, `Workouts`.`Type`, `Workouts`.`Price`
+            FROM ClientWorkouts 
+            JOIN Clients ON `ClientWorkouts`.`ClientID` = `Clients`.`ID`
+            JOIN `Workouts` ON `ClientWorkouts`.`WorkoutID` = `Workouts`.`ID`
+            WHERE `Workouts`.`TrainerID` = ?';    
+    $prepare_values = mysqli_prepare($con, $sql);
+
+    mysqli_stmt_bind_param($prepare_values, 'i', $trener_id);
+    mysqli_stmt_execute($prepare_values);
+
+    return mysqli_fetch_all(mysqli_stmt_get_result($prepare_values), MYSQLI_ASSOC) ?? [];
 }
 
 // админы
@@ -115,37 +223,28 @@ function get_treners(mysqli $con): array
  * Возвращает список админов
  * @param mysqli $con подключение к базе
  *
- * @return array список пользователей 
+ * @return array список админов 
  */
 function get_admins(mysqli $con): array
 {
     $sql = "SELECT * FROM Admins";
     return mysqli_fetch_all(mysqli_query($con, $sql), MYSQLI_ASSOC);
 }
-
-// абонементы для конкретного пользователя
-function get_сlient_abonement(mysqli $con, int $client_id): array 
-{
-    $sql = 'SELECT `ClientAbonement`.*,`Abonement`.* 
-            FROM `ClientAbonement` INNER JOIN `Abonement` 
-            ON `ClientAbonement`.`AbonementID` = `Abonement`.`AbonementID`
-            WHERE `ClientID` = ?';
+/**
+ * Выбирает админа из базы данных по его логину
+ *
+ * @param mysqli $con соединение с базой данных
+ * @param string $login логин админа
+ *
+ * @return array данные админа
+ */
+function get_admin_by_login(mysqli $con, string $login): array {
+    $sql = 'SELECT * FROM `Admins`
+            WHERE `AdminLogin` = ?';
     $prepare_values = mysqli_prepare($con, $sql);
-    mysqli_stmt_bind_param($prepare_values, 'i', $client_id);
-    mysqli_stmt_execute($prepare_values);
-    return mysqli_fetch_all(mysqli_stmt_get_result($prepare_values), MYSQLI_ASSOC) ?? [];
-}
 
-// тренировки для конкретного пользователя
-
-function get_сlient_trainers(mysqli $con, int $client_id): array 
-{
-    $sql = 'SELECT `ClientWorkouts`.*,`Workouts`.*
-            FROM `ClientWorkouts` INNER JOIN `Workouts` 
-            ON `ClientWorkouts`.`WorkoutID` = `Workouts`.`WorkoutID`
-            WHERE `ClientID` = ?';
-    $prepare_values = mysqli_prepare($con, $sql);
-    mysqli_stmt_bind_param($prepare_values, 'i', $client_id);
+    mysqli_stmt_bind_param($prepare_values, 's', $login);
     mysqli_stmt_execute($prepare_values);
-    return mysqli_fetch_all(mysqli_stmt_get_result($prepare_values), MYSQLI_ASSOC) ?? [];
+
+    return mysqli_fetch_assoc(mysqli_stmt_get_result($prepare_values)) ?? [];
 }
