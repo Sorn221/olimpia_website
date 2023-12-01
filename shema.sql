@@ -48,7 +48,7 @@ CREATE TABLE Abonement (
 CREATE TABLE ClientAbonement (
     ClientID INT,
     AbonementID INT,
-    PurchaseDate DATETIME,
+    PurchaseDate DATETIME NOT NULL,
     FOREIGN KEY (ClientID) REFERENCES Clients(ID),
     FOREIGN KEY (AbonementID) REFERENCES Abonement(ID)
 );

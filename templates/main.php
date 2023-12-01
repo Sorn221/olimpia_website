@@ -1,3 +1,46 @@
+<style>
+    input:invalid .form__error{
+    display: block;
+    }
+
+    .form__error--bottom {
+    display: none;
+    margin-bottom: 15px;
+    font-size: 16px;
+    }
+
+    .form--invalid .form__error--bottom {
+    display: block;
+    }
+
+    .form__item--invalid .form__error {
+    display: block;
+    }
+
+    .form__item--invalid textarea,
+    .form__item--invalid input {
+    background: #ffffff url("../images/error.svg") 97% 11px no-repeat;
+    border-color: #f84646;
+    }
+
+    .form__item--invalid select {
+    background: #ffffff url("../images/error.svg") 322px 11px no-repeat;
+    border-color: #f84646;
+    }
+
+    .form__item--small.form__item--invalid input {
+    background: #ffffff url("../images/error.svg") 94% 11px no-repeat;
+    }
+
+    .form__item--wide.form__item--invalid textarea {
+    background: #ffffff url("../images/error.svg") 702px 11px no-repeat;
+    }
+    .form__error {
+    display: none;
+    font-size: 11px;
+    color: #f84646;
+    }    
+</style>
 <main>
 
     <body data-spy="scroll" data-target="#navbarNav" data-offset="50">
@@ -40,14 +83,19 @@
                 <div class="row">
 
                     <div class="d-flex flex-column justify-content-center ml-lg-auto mr-lg-5 col-lg-5 col-md-6 col-12">
-                        <h2 class="mb-3 text-white" data-aos="fade-up">Новичек в зале?</h2>
+                        <h2 class="mb-3 text-white" data-aos="fade-up">Новичок в зале?</h2>
 
-                        <h6 class="mb-4 text-white" data-aos="fade-up">Скидка 500 руб на первый обонемент!</h6>
+                        <h6 class="mb-4 text-white" data-aos="fade-up">Приобретай абонемент и присоединяйся!</h6>
 
                         <p data-aos="fade-up" data-aos-delay="200"></p>
-
-                        <a href="#" class="btn custom-btn bg-color mt-3" data-aos="fade-up" data-aos-delay="300"
-                            data-toggle="modal" data-target="#membershipForm">Начни тренироваться сегодня</a>
+                        <?php if(isset($_SESSION['username'])):?>
+                            <a  class="btn custom-btn bg-color mt-3" data-aos="fade-up" data-aos-delay="300"
+                            data-toggle="modal" data-target="#membershipForm"  href="#" >Начни тренироваться сегодня</a>
+                        <?php else:?>
+                            <a  class="btn custom-btn bg-color mt-3" data-aos="fade-up" data-aos-delay="300"
+                              href="sign-in.php" >Начни тренироваться сегодня</a>
+                        <?php endif?>
+                            
                     </div>
 
                     <div class="mr-lg-auto mt-3 col-lg-4 col-md-6 col-12">
@@ -327,7 +375,7 @@
                         </h2>
 
                         <form action="#" method="post" class="contact-form webform" data-aos="fade-up"
-                            data-aos-delay="400" role="form">
+                            data-aos-delay="400" role="form" id="forma">
                             <input type="text" class="form-control" name="cf-name" placeholder="Имя">
 
                             <input type="email" class="form-control" name="cf-email" placeholder="Почта">
@@ -357,48 +405,8 @@
                 </div>
             </div>
         </section>
-
-
-
-
-        <!-- Modal -->
-        <div class="modal fade" id="membershipForm" tabindex="-1" role="dialog" aria-labelledby="membershipFormLabel"
-            aria-hidden="true">
-            <div class="modal-dialog" role="document">
-
-                <div class="modal-content">
-                    <div class="modal-header">
-
-                        <h2 class="modal-title" id="membershipFormLabel">Форма записи</h2>
-
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-
-                    <div class="modal-body">
-                        <form class="membership-form webform" role="form">
-                            <input type="text" class="form-control" name="cf-name" placeholder="Тимофей Фомин">
-
-                            <input type="email" class="form-control" name="cf-email"
-                                placeholder="timofeyFomin@gmail.com">
-
-                            <input type="tel" class="form-control" name="cf-phone" placeholder="+7(999)999-99-99"
-                                pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
-
-                            <textarea class="form-control" rows="3" name="cf-message"
-                                placeholder="Комментарий"></textarea>
-
-                            <button type="submit" class="form-control" id="submit-button"
-                                name="submit">Отправить</button>
-
-
-                        </form>
-                    </div>
-                </div>
-
-                <!-- FOOTER -->
-                <div class="modal-footer"></div>
+<!-- FOOTER -->
+<div class="modal-footer"></div>
                 <footer class="site-footer">
                     <div class="container">
                         <div class="row">
@@ -422,6 +430,44 @@
                         </div>
                     </div>
                 </footer>
+
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="membershipForm" tabindex="-1" role="dialog" aria-labelledby="membershipFormLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+
+                <div class="modal-content">
+                    <div class="modal-header">
+
+                        <h2 class="modal-title" id="membershipFormLabel">Форма записи</h2>
+
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form class="membership-form webform" role="form" action="index.php" method="post">
+                            <input type="text" class="form-control" name="name" value="<?=$_SESSION['username']?>" readonly>
+
+                            <input type="email" class="form-control" name="cf-email" value="<?=$_SESSION['email']?>" readonly>
+
+                            <select name="abonements" id="abonements" class="form-control">
+                                <option value="0">Выберите абонемент</option>
+                                <?php foreach ($abonements as $item):?>
+                                    <option <?=getPostVal('abonements') === $item['ID'] ? 'selected value='.$item['ID']: 'value='.$item['ID'];?>><?=$item['Type'];?></option>
+                                <?php endforeach; ?>
+                            </select>
+                            <span class="form__error">
+                                <?= $errors['abonement'] ?>
+                            </span>
+                            <button type="submit" class="form-control" id="submit-button"
+                                name="submit">Оплатить</button>
+                        </form>
+                    </div>
+                </div>              
             </div>
         </div>
         </div>

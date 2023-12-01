@@ -220,17 +220,6 @@ function get_trains_story(mysqli $con, int $trener_id)
 
 // админы
 /**
- * Возвращает список админов
- * @param mysqli $con подключение к базе
- *
- * @return array список админов 
- */
-function get_admins(mysqli $con): array
-{
-    $sql = "SELECT * FROM Admins";
-    return mysqli_fetch_all(mysqli_query($con, $sql), MYSQLI_ASSOC);
-}
-/**
  * Выбирает админа из базы данных по его логину
  *
  * @param mysqli $con соединение с базой данных
@@ -247,4 +236,31 @@ function get_admin_by_login(mysqli $con, string $login): array {
     mysqli_stmt_execute($prepare_values);
 
     return mysqli_fetch_assoc(mysqli_stmt_get_result($prepare_values)) ?? [];
+}
+
+/**
+ * Возвращает список абонементов из бд
+ * @param mysqli $con подключение к базе
+ *
+ * @return array список абонементов 
+ */
+function get_abonements(mysqli $con): array
+{
+    $sql = 'SELECT * FROM `Abonement`';
+    $prepare_values = mysqli_prepare($con, $sql);
+    mysqli_stmt_execute($prepare_values);
+    return mysqli_fetch_all(mysqli_stmt_get_result($prepare_values), MYSQLI_ASSOC) ?? [];
+}
+function add_client_abonement(int $abonement_id, int $client_id,  mysqli $con)
+{
+    $today = date("y.m.d"); 
+
+    $sql = "INSERT INTO `clientabonement`(`ClientID`, `AbonementID`, `PurchaseDate`)
+            VALUES (?,?,?)
+    ";
+    
+    $stmt = mysqli_prepare($con, $sql);
+    mysqli_stmt_bind_param($stmt, 'iis',$client_id, $abonement_id, $today);
+    mysqli_stmt_execute($stmt);
+    return $con->insert_id;
 }

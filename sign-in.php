@@ -71,6 +71,7 @@ else
                 session_start();
                 $_SESSION['username'] = $user['Name'];
                 $_SESSION['user_id'] = $user['ID'];
+                $_SESSION['email'] = $user['Email'];
                 header('Location: /olimpia/olimpia_website/index.php');
                 exit;
             }
