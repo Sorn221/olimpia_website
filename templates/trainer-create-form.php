@@ -85,47 +85,55 @@
 </style>
 <main class="main-form">
     <div class="registration-form">
-        <h2>Регистрация админа</h2>
-        <form class="<?php if ($errors): ?>form--invalid<?php endif; ?>" action="sign-ups.php" method="post" autocomplete="off">
-
+        <h2>Регистрация тренера</h2>
+        <form action="trener-create.php" method="post" class="<?php if ($errors): ?>form--invalid<?php endif; ?>" autocomplete="off">
+            
             <div class="<?php if (isset($errors['email'])): ?>form__item--invalid<?php endif; ?>">
                 <label for="email">Email: <sup>*</sup></label>
                 <input value="<?= getPostVal('email'); ?>" type="email" id="email" name="email" placeholder="Введите e-mail"
-                    >
+                    required>
                 <span class="form__error">
-                        <?= $errors['email'] ?>
-                </span> 
+                    <?= $errors['email'] ?>
+                </span>
             </div>
 
             <div class="<?php if (isset($errors['password'])): ?>form__item--invalid<?php endif; ?>">
                 <label for="password">Пароль: <sup>*</sup></label>
                 <input value="<?= getPostVal('password'); ?>" type="password" id="password" name="password"
-                    placeholder="Введите пароль" >
+                    placeholder="Введите пароль" required>
                 <span class="form__error">
-                        <?= $errors['password'] ?>
-                </span> 
+                    <?= $errors['password'] ?>
+                </span>
             </div>
 
             <div class="<?php if (isset($errors['name'])): ?>form__item--invalid<?php endif; ?>">
                 <label for="name">Имя: <sup>*</sup></label>
                 <input type="text" id="name" name="name" placeholder="Введите имя" value="<?= getPostVal('name'); ?>"
-                    >
+                    required>
                 <span class="form__error">
-                        <?= $errors['name'] ?>
+                    <?= $errors['name'] ?>
                 </span> 
             </div>
 
             <div class="<?php if (isset($errors['login'])): ?>form__item--invalid<?php endif; ?>">
                 <label for="login">Логин: <sup>*</sup></label>
                 <input type="text" id="login" name="login" placeholder="Введите логин" value="<?= getPostVal('login'); ?>"
-                    >
+                    required>
                 <span class="form__error">
                     <?= $errors['login'] ?>
                 </span>
             </div>
 
+            <div class="<?php if (isset($errors['number'])): ?>form__item--invalid<?php endif; ?>">
+                <label for="number">Номер телефона: <sup>*</sup></label>
+                <input value="<?= getPostVal('number'); ?>" type="tel" id="number" name="number" pattern="\+7\s?[\(]{0,1}9[0-9]{2}[\)]{0,1}\s?\d{3}[-]{0,1}\d{2}[-]{0,1}\d{2}"
+                    placeholder="+7(9XX) XXX-XX-XX" required>
+                <span class="form__error">
+                    <?= $errors['number'] ?>
+                </span>
+            </div>
 
-            <button type="submit">Зарегистрировать</button>
+            <button type="submit">Зарегистрироваться</button>
         </form>
     </div>
 </main>

@@ -24,7 +24,8 @@ CREATE TABLE Trainers (
     Email VARCHAR(255) UNIQUE,
     PhoneNumber VARCHAR(15),
     TrainerLogin VARCHAR(255) UNIQUE,
-    Password VARCHAR(255) UNIQUE
+    Password VARCHAR(255) UNIQUE,
+    Active BOOLEAN
 );
 
 -- Таблица "Тренировки"
@@ -33,7 +34,7 @@ CREATE TABLE Workouts (
     Type VARCHAR(50),
     TrainerID INT,
     Price INT,
-    FOREIGN KEY (TrainerID) REFERENCES Trainers(ID)
+    FOREIGN KEY (TrainerID) REFERENCES Trainers(ID) ON DELETE CASCADE
 );
 
 -- Таблица "Абонементы"

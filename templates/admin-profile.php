@@ -105,13 +105,15 @@
                         <?php if (!empty($trainers)): ?>
                             <ul>
                                 <?php foreach ($trainers as $trainer): ?>
-                                    <li>Имя: <?=$trainer['Name'] ?> | Email: <?=$trainer['Email'] ?> | Номер: <?=$trainer['PhoneNumber'] ?> | Логин: <?=$trainer['TrainerLogin'] ?> | <button class="delete-button">Удалить</button></li>
+                                    <li>Имя: <?=$trainer['Name'] ?> | Email: <?=$trainer['Email'] ?> | Номер: <?=$trainer['PhoneNumber'] ?> | Логин: <?=$trainer['TrainerLogin'] ?>
+                                    | Статус: <?php if($trainer['Active'] == 0):?> не работает <?php else:?> работает <?php endif?>| <button class="delete-button" href="trener-delete.php" onclick="<?php $_SESSION['trener_id'] = $trainer['ID'] ?>">Удалить</button></li>
+                                    <?php var_dump($trainer['Active'])?>
                                 <?php endforeach; ?>
                             </ul>
                         <?php else : ?>
                             <p>Список сотрудников-тренеров пуст</p>
                         <?php endif; ?>
-                        <a href="admin-create.php"><button class="button">Добавить сотрудника</button></a>
+                        <a href="trener-create.php"><button class="button">Добавить сотрудника</button></a>
                     </div>
                 <div class="separator"></div>
                     <div class="admin-functionalities">

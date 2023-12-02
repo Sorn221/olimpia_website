@@ -13,8 +13,11 @@ function getPostVal($name): string
 
 // функции для работы с бд
 
-// запись в бд
-// клиенты
+// -------------------------------------------------------------клиенты
+// -------------------------------------------------------------
+// -------------------------------------------------------------
+// -------------------------------------------------------------
+// -------------------------------------------------------------
 
 function add_client(string $name, string $email,string $login, string $password, string $contact_info,  mysqli $con): int
 {
@@ -124,10 +127,34 @@ function get_client_by_id(mysqli $con, int $client_id)
 
     return mysqli_fetch_assoc(mysqli_stmt_get_result($prepare_values)) ?? [];
 }
+/**
+ * Добавляет в базу
+ *
+ * @param mysqli $con соединение с базой данных
+ * @param int $client_id id пользователя
+ * @param int $abonement_id id абонемента
+ *
+ * @return int id добаленной покупки абонемента
+ */
+function add_client_abonement(int $abonement_id, int $client_id,  mysqli $con)
+{
+    $today = date("y.m.d"); 
 
+    $sql = "INSERT INTO `clientabonement`(`ClientID`, `AbonementID`, `PurchaseDate`)
+            VALUES (?,?,?)
+    ";
+    
+    $stmt = mysqli_prepare($con, $sql);
+    mysqli_stmt_bind_param($stmt, 'iis',$client_id, $abonement_id, $today);
+    mysqli_stmt_execute($stmt);
+    return $con->insert_id;
+}
 
-
-// тренера
+// -------------------------------------------------------------тренера
+// -------------------------------------------------------------
+// -------------------------------------------------------------
+// -------------------------------------------------------------
+// -------------------------------------------------------------
 /**
  * Возвращает список тренеров
  * @param mysqli $con подключение к базе
@@ -195,6 +222,11 @@ function get_trener_trains(mysqli $con, int $trener_id)
 
     return mysqli_fetch_all(mysqli_stmt_get_result($prepare_values), MYSQLI_ASSOC) ?? [];
 }
+function get_admins(mysqli $con): array
+{
+    $sql = "SELECT * FROM Admins";
+    return mysqli_fetch_all(mysqli_query($con, $sql), MYSQLI_ASSOC);
+}
 /**
  * Выбирает историю персональных тренировок для конкретного тренера из базы данных по его id
  *
@@ -217,8 +249,30 @@ function get_trains_story(mysqli $con, int $trener_id)
 
     return mysqli_fetch_all(mysqli_stmt_get_result($prepare_values), MYSQLI_ASSOC) ?? [];
 }
+/**
+ * Удаляет тренера из базы данных по его id
+ *
+ * @param mysqli $con соединение с базой данных
+ * @param string $trener_id id тренера
+ *
+ * 
+ */
+function deactivate_trener(mysqli $con, int $trener_id)
+{
+    $sql = 'ALTER TABLE Trainers
+            SET Active = 0
+            WHERE ID = ?';
+    $prepare_values = mysqli_prepare($con, $sql);
 
-// админы
+    mysqli_stmt_bind_param($prepare_values, 'i', $trener_id);
+    mysqli_stmt_execute($prepare_values);
+}
+
+// -------------------------------------------------------------админы
+// -------------------------------------------------------------
+// -------------------------------------------------------------
+// -------------------------------------------------------------
+// -------------------------------------------------------------
 /**
  * Выбирает админа из базы данных по его логину
  *
@@ -250,17 +304,4 @@ function get_abonements(mysqli $con): array
     $prepare_values = mysqli_prepare($con, $sql);
     mysqli_stmt_execute($prepare_values);
     return mysqli_fetch_all(mysqli_stmt_get_result($prepare_values), MYSQLI_ASSOC) ?? [];
-}
-function add_client_abonement(int $abonement_id, int $client_id,  mysqli $con)
-{
-    $today = date("y.m.d"); 
-
-    $sql = "INSERT INTO `clientabonement`(`ClientID`, `AbonementID`, `PurchaseDate`)
-            VALUES (?,?,?)
-    ";
-    
-    $stmt = mysqli_prepare($con, $sql);
-    mysqli_stmt_bind_param($stmt, 'iis',$client_id, $abonement_id, $today);
-    mysqli_stmt_execute($stmt);
-    return $con->insert_id;
 }

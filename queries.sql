@@ -11,7 +11,7 @@ INSERT INTO Admins (Name, Email, AdminLogin, Password) VALUES
 -- пароль = adminpass1
 
 -- Добавление примерных данных в таблицу "Тренера"
-INSERT INTO Trainers (Name, Email, PhoneNumber, TrainerLogin, Password) VALUES 
+INSERT INTO Trainers (Name, Email, PhoneNumber, TrainerLogin, Password, Active) VALUES 
 ('Александр Тренеров', 'trainer1@example.com', '111-111-111', 'train1', '$2y$10$8RpnzjL4K42.v99rX2iqnOZmpdHYrcxskTj/ids3q7GowKHdVJFVq');
 -- пароль = train1
 -- Добавление примерных данных в таблицу "Тренировки"
