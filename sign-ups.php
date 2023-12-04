@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         $len = strlen($_POST['login']);
 
         if ($len > MAX_EMAIL) {
-            $errors['login'] = "Логин должен быть меньше " . MAX_EMAIL . " символов";
+            $errors['login'] = "Логин должен быть меньше " . MAX_LOGIN . " символов";
         }
     }
     //проверка на превышение символов контактной инф

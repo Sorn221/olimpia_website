@@ -86,7 +86,7 @@
 <main class="main-form">
     <div class="registration-form">
         <h2>Регистрация админа</h2>
-        <form class="<?php if ($errors): ?>form--invalid<?php endif; ?>" action="sign-ups.php" method="post" autocomplete="off">
+        <form class="<?php if ($errors): ?>form--invalid<?php endif; ?>" action="admin-create.php" method="post" autocomplete="off">
 
             <div class="<?php if (isset($errors['email'])): ?>form__item--invalid<?php endif; ?>">
                 <label for="email">Email: <sup>*</sup></label>
@@ -126,6 +126,7 @@
 
 
             <button type="submit">Зарегистрировать</button>
+            
         </form>
     </div>
 </main>

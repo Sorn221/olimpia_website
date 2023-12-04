@@ -134,6 +134,7 @@
             </div>
 
             <button type="submit">Зарегистрироваться</button>
+            
         </form>
     </div>
 </main>

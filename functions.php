@@ -267,6 +267,42 @@ function deactivate_trener(mysqli $con, int $trener_id)
     mysqli_stmt_bind_param($prepare_values, 'i', $trener_id);
     mysqli_stmt_execute($prepare_values);
 }
+function add_trener(string $name, string $email, string $number, string $login, string $password, mysqli $con): int
+{
+    $temp_password = password_hash($password, PASSWORD_DEFAULT);
+    $sql = "INSERT INTO Trainers(`Name`, `Email`, `PhoneNumber`, `TrainerLogin`, `Password`)
+            VALUES(?,?,?,?,?);";
+    $stmt = mysqli_prepare($con, $sql);
+    mysqli_stmt_bind_param($stmt, 'sssss', 
+        $name, 
+        $email,
+        $number,
+        $login, 
+        $temp_password
+    );
+    mysqli_stmt_execute($stmt);
+    return $con->insert_id;
+}
+
+
+/**
+ * Выбирает тренера из базы данных по его E-mail
+ *
+ * @param mysqli $con соединение с базой данных
+ * @param string $email E-mail тренера
+ *
+ * @return array данные тренера
+ */
+function get_trener_by_email(mysqli $con, string $email): array {
+    $sql = 'SELECT * FROM `Trainers`
+            WHERE `Email` = ?';
+    $prepare_values = mysqli_prepare($con, $sql);
+
+    mysqli_stmt_bind_param($prepare_values, 's', $email);
+    mysqli_stmt_execute($prepare_values);
+
+    return mysqli_fetch_assoc(mysqli_stmt_get_result($prepare_values)) ?? [];
+}
 
 // -------------------------------------------------------------админы
 // -------------------------------------------------------------
@@ -305,3 +341,41 @@ function get_abonements(mysqli $con): array
     mysqli_stmt_execute($prepare_values);
     return mysqli_fetch_all(mysqli_stmt_get_result($prepare_values), MYSQLI_ASSOC) ?? [];
 }
+
+
+function add_admin(string $name, string $email,string $login, string $password, mysqli $con): int
+{
+    $temp_password = password_hash($password, PASSWORD_DEFAULT);
+    $sql = "INSERT INTO Admins(`Name`, `Email`, `AdminLogin`, `Password`)
+            VALUES(?,?,?,?);";
+    $stmt = mysqli_prepare($con, $sql);
+    mysqli_stmt_bind_param($stmt, 'ssss', 
+        $name, 
+        $email,
+        $login, 
+        $temp_password
+    );
+    mysqli_stmt_execute($stmt);
+    return $con->insert_id;
+}
+
+
+/**
+ * Выбирает админа из базы данных по его E-mail
+ *
+ * @param mysqli $con соединение с базой данных
+ * @param string $email E-mail админа
+ *
+ * @return array данные админа
+ */
+function get_admin_by_email(mysqli $con, string $email): array {
+    $sql = 'SELECT * FROM `Admins`
+            WHERE `Email` = ?';
+    $prepare_values = mysqli_prepare($con, $sql);
+
+    mysqli_stmt_bind_param($prepare_values, 's', $email);
+    mysqli_stmt_execute($prepare_values);
+
+    return mysqli_fetch_assoc(mysqli_stmt_get_result($prepare_values)) ?? [];
+}
+
