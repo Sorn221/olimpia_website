@@ -93,7 +93,7 @@
                             data-toggle="modal" data-target="#membershipForm"  href="#" >Начни тренироваться сегодня</a>
                         <?php else:?>
                             <a  class="btn custom-btn bg-color mt-3" data-aos="fade-up" data-aos-delay="300"
-                              href="sign-in.php" >Начни тренироваться сегодня</a>
+                              href="sign-ups.php" >Начни тренироваться сегодня</a>
                         <?php endif?>
                             
                     </div>
@@ -193,8 +193,6 @@
                 <div class="row">
 
                     <div class="col-lg-12 col-12 text-center mb-5">
-                        <h6 data-aos="fade-up">Сделай идеальное тело</h6>
-
                         <h2 data-aos="fade-up" data-aos-delay="200">Наши групповые занятия</h2>
                     </div>
 
@@ -370,23 +368,6 @@
             <div class="container">
                 <div class="row">
 
-                    <div class="ml-auto col-lg-5 col-md-6 col-12">
-                        <h2 class="mb-4 pb-2" data-aos="fade-up" data-aos-delay="200">Напиши нам если остались вопросы
-                        </h2>
-
-                        <form action="#" method="post" class="contact-form webform" data-aos="fade-up"
-                            data-aos-delay="400" role="form" id="forma">
-                            <input type="text" class="form-control" name="cf-name" placeholder="Имя">
-
-                            <input type="email" class="form-control" name="cf-email" placeholder="Почта">
-
-                            <textarea class="form-control" rows="5" name="cf-message"
-                                placeholder="Сообщение"></textarea>
-
-                            <button type="submit" class="form-control" id="submit-button" name="submit">Отправить
-                                сообщение</button>
-                        </form>
-                    </div>
 
                     <div class="mx-auto mt-4 mt-lg-0 mt-md-0 col-lg-5 col-md-6 col-12">
                         <h2 class="mb-4" data-aos="fade-up" data-aos-delay="600">Где нас можно найти

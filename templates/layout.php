@@ -12,23 +12,13 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/aos.css">
+    
 
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="css/tooplate-gymso-style.css">
     <title>
         <?= htmlspecialchars($title) ?>
     </title>
-    <style>
-        .logged-name {
-            color: white;
-
-        }
-
-        .logged-name:hover {
-            color: #f13a11;
-
-        }
-    </style>
 </head>
 
 <body>

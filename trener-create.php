@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
         $password = $_POST['password'];
         $login = $_POST['login'];
         $number = $_POST['number'];
-        //add_admin($name, $email, $login, $password, $con);
+        add_trener($name, $email, $number, $login, $password, $con);
         header('Location: /olimpia/olimpia_website/profile.php');
     }
 }

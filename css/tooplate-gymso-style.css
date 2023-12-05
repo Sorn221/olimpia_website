@@ -667,5 +667,14 @@ https://www.tooplate.com/view/2119-gymso-fitness
       display: block;
     }
   }
+  .logged-name {
+    color: white;
+
+}
+
+.logged-name:hover {
+    color: #f13a11;
+
+}
 
   
