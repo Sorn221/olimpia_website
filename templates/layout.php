@@ -4,18 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-    <meta name="author" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/aos.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/main.css">
     
-
     <!-- MAIN CSS -->
-    <link rel="stylesheet" href="css/tooplate-gymso-style.css">
+
     <title>
         <?= htmlspecialchars($title) ?>
     </title>
@@ -23,80 +17,56 @@
 
 <body>
 
-    <!-- HEADER -->
     <header>
-        <!-- MENU BAR -->
-        <nav class="navbar navbar-expand-lg fixed-top">
-            <div class="container">
-
+        <div class="header-conteiner">
+            <nav class="navbar navbar-expand-lg">
                 <a class="navbar-brand" href="index.php">OLIMPIA</a>
 
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav ml-lg-auto">
-                        <li class="nav-item">
-                            <a href="#home" class="nav-link smoothScroll">Основная</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="#about" class="nav-link smoothScroll">О нас</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="#class" class="nav-link smoothScroll">Групповые занятия</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="#schedule" class="nav-link smoothScroll">Расписания</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="#contact" class="nav-link smoothScroll">Контакты</a>
-                        </li>
-                    </ul>
-
-                    <ul class="social-icon ml-lg-3">
-                        <li><a href="#" class="fa fa-facebook"></a></li>
-                        <li><a href="#" class="fa fa-telegram"></a></li>
-                        <li><a href="#" class="fa fa-instagram"></a></li>
+                <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a class="nav-link" href="#home">Основная</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#about">О нас</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#class">Групповые занятия</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#schedule">Расписания</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#contact">Контакты</a></li>
                     </ul>
                 </div>
-                <div class="login-bar ml-lg-auto">
 
+                <div>
                     <?php if(isset($_SESSION['username'])): ?>
-                        <div class="user-menu__logged">
-                            <a href="profile.php"><p class="logged-name"><?=htmlspecialchars($_SESSION['username'])?></p></a>
-                            <a class="user-menu__logout logged-name" href="logout.php">Выход</a>
+                        <div>
+                            <a href="profile.php" class="logged-name"><?=htmlspecialchars($_SESSION['username'])?></a>
+                            <a href="logout.php" class="logged-name">Выход</a>
                         </div>
                     <?php else: ?>
-                        <ul class=" ml-lg-auto">
-                            <li class="nav-item">
-                                <a href="sign-in.php" class="nav-link smoothScroll">Sign-in</a>
-                            </li>
-
-                            <li class="nav-item">
-                                <a href="sign-ups.php" class="nav-link smoothScroll">Sign-up</a>
-                            </li>
+                        <ul class="navbar-nav">
+                            <li class="nav-item"><a class="nav-link" href="sign-in.php">Sign-in</a></li>
+                            <li class="nav-item"><a class="nav-link" href="sign-ups.php">Sign-up</a></li>
                         </ul>
                     <?php endif; ?>
                 </div>
-            </div>
-        </nav>
+            </nav>
+        </div>
     </header>
-
     <?= $content ?>
+    <footer>
+        <div>
+            <div>
+                <div>
+                    <p >Copyright &copy; 2023 URTK Co.
+                        <br>Design: <a href="https://github.com/Sorn221">Sorn</a>
+                    </p>
+                </div>
+                <div>
+                    <p >
+                        <a href="#">fomin.timofey.sistema@yandex.ru</a>
+                    </p>
+                    <p> +7(922)1889024</p>
+                </div>
 
-
-    <!-- SCRIPTS -->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/aos.js"></script>
-    <script src="js/smoothscroll.js"></script>
-    <script src="js/custom.js"></script>
+            </div>
+        </div>
+    </footer>
 </body>
 
 </html>

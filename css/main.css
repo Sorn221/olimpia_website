@@ -1,0 +1,210 @@
+/*---------------------------------------
+      HEADER         
+  -----------------------------------------*/
+body {
+    font-family: 'Arial', sans-serif;
+    color: #fff;
+}
+
+header {
+    background-color: #000;
+    padding: 15px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav a {
+    color: #fff;
+    transition: color 0.3s ease-in-out;
+}
+
+nav a:hover {
+    color: #f13a11;
+}
+
+.navbar-nav {
+    flex-direction: row;
+}
+
+.navbar-nav .nav-item {
+    margin-right: 15px;
+}
+
+.navbar-toggler {
+    border: none;
+}
+
+.logged-name {
+    margin-right: 15px;
+}
+
+@media (max-width: 768px) {
+    .navbar-nav {
+        flex-direction: column;
+    }
+
+    .navbar-nav .nav-item {
+        margin-bottom: 10px;
+        margin-right: 0;
+    }
+
+    .logged-name {
+        margin-right: 0;
+    }
+}
+.header-conteiner{
+    background: #000;
+}
+
+
+/*---------------------------------------
+      FOOTER         
+  -----------------------------------------*/
+footer {
+    background-color: #000;
+    color: #fff;
+    padding: 30px 0;
+
+}
+
+footer a {
+    color: #fff;
+    transition: color 0.3s ease-in-out;
+}
+
+footer a:hover {
+    color: #f13a11;
+}
+
+footer p {
+    margin: 0;
+}
+
+footer a,
+footer p {
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+footer a:last-child {
+    margin-bottom: 0;
+}
+
+footer a:hover {
+    text-decoration: none;
+}
+
+
+/*---------------------------------------
+      SECTION         
+  -----------------------------------------*/
+section {
+    text-align: center;
+    padding: 50px 0;
+}
+
+section h2 {
+    color: #f13a11;
+    margin-bottom: 20px;
+}
+
+section h6 {
+    color: #fff;
+}
+
+section p {
+    color: #ccc;
+    margin-bottom: 30px;
+}
+
+section a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #fff;
+    color: #000;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+section a:hover {
+    background-color: #f13a11;
+    color: #fff;
+}
+
+section img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+   /*---------------------------------------
+      HERO         
+  -----------------------------------------*/
+.hero {
+    background-image: url('../images/hero-bg.jpg');
+    background-size: cover;
+    background-position: top;
+    background-repeat: no-repeat;
+    vertical-align: middle;
+    min-height: 100vh;
+    position: relative;
+  }
+
+
+  /*---------------------------------------
+      feature           
+  -----------------------------------------*/
+  .feature {
+    background: rgb(31, 32, 32);
+    padding: 5rem 0;
+  }
+  /*---------------------------------------
+      ABOUT           
+  -----------------------------------------*/
+  .about {
+    background: #fff;
+  }
+
+  .about-working-hours {
+    border-left: 2px solid;
+    padding-left: 3.5rem;
+  }
+
+  .about-working-hours strong {
+    color: var(--white-color);
+    opacity: 0.85;
+  }
+
+  .team-thumb {
+    position: relative;
+  }
+
+  .team-info {
+    background: var(--white-color);
+    border-radius: 0 0 2px 2px;
+    box-shadow: 6px 0 38px rgba(20,20,20,0.10);
+    padding: 20px;
+    position: relative;
+  }
+
+  .team-info span {
+    font-weight: var(--font-weight-light);
+    opacity: 0.85;
+  }
+  /*---------------------------------------
+      CLASS           
+  -----------------------------------------*/
+  /*---------------------------------------
+      schedule           
+  -----------------------------------------*/
+  /*---------------------------------------
+      contact           
+  -----------------------------------------*/
+
+ 

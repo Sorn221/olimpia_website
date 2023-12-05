@@ -33,5 +33,5 @@ $errors = [];
 
 
 $page_content = include_template('main.php',['abonements' => $abonements]);
-$layout = include_template('layout.php', ['title' => 'OLIMPIA', 'content' => $page_content]);
+$layout = include_template('layout.php', ['title' => 'OLIMPIA','content' => $page_content]);
 print $layout;
