@@ -222,11 +222,7 @@ function get_trener_trains(mysqli $con, int $trener_id)
 
     return mysqli_fetch_all(mysqli_stmt_get_result($prepare_values), MYSQLI_ASSOC) ?? [];
 }
-function get_admins(mysqli $con): array
-{
-    $sql = "SELECT * FROM Admins";
-    return mysqli_fetch_all(mysqli_query($con, $sql), MYSQLI_ASSOC);
-}
+
 /**
  * Выбирает историю персональных тренировок для конкретного тренера из базы данных по его id
  *
@@ -267,18 +263,19 @@ function deactivate_trener(mysqli $con, int $trener_id)
     mysqli_stmt_bind_param($prepare_values, 'i', $trener_id);
     mysqli_stmt_execute($prepare_values);
 }
-function add_trener(string $name, string $email, string $number, string $login, string $password, mysqli $con): int
+function add_trener(string $name, string $email, string $number, string $login, string $password, string $image, mysqli $con): int
 {
     $temp_password = password_hash($password, PASSWORD_DEFAULT);
-    $sql = "INSERT INTO Trainers(`Name`, `Email`, `PhoneNumber`, `TrainerLogin`, `Password`)
-            VALUES(?,?,?,?,?);";
+    $sql = "INSERT INTO Trainers(`Name`, `Email`, `PhoneNumber`, `TrainerLogin`, `Password`, `Image`)
+            VALUES(?,?,?,?,?,?);";
     $stmt = mysqli_prepare($con, $sql);
-    mysqli_stmt_bind_param($stmt, 'sssss', 
+    mysqli_stmt_bind_param($stmt, 'ssssss', 
         $name, 
         $email,
         $number,
         $login, 
-        $temp_password
+        $temp_password,
+        $image
     );
     mysqli_stmt_execute($stmt);
     return $con->insert_id;
@@ -326,6 +323,11 @@ function get_admin_by_login(mysqli $con, string $login): array {
     mysqli_stmt_execute($prepare_values);
 
     return mysqli_fetch_assoc(mysqli_stmt_get_result($prepare_values)) ?? [];
+}
+function get_admins(mysqli $con): array
+{
+    $sql = "SELECT * FROM Admins";
+    return mysqli_fetch_all(mysqli_query($con, $sql), MYSQLI_ASSOC);
 }
 
 /**
@@ -379,3 +381,12 @@ function get_admin_by_email(mysqli $con, string $email): array {
     return mysqli_fetch_assoc(mysqli_stmt_get_result($prepare_values)) ?? [];
 }
 
+
+//остальное
+function get_trains(mysqli $con): array
+{
+    $sql = 'SELECT * FROM `Workouts`';
+    $prepare_values = mysqli_prepare($con, $sql);
+    mysqli_stmt_execute($prepare_values);
+    return mysqli_fetch_all(mysqli_stmt_get_result($prepare_values), MYSQLI_ASSOC) ?? [];
+}

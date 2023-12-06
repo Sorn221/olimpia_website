@@ -21,20 +21,18 @@
         </section>
 
         <section id="feature" class="feature">
-            <div class="d-flex flex-column justify-content-center align-items-center">
+            <div class="container">
                 <div class="row">
-                    <div>
+                    <div class="col-sm">
                         <h2>Новичок в зале?</h2>
                         <h6>Приобретай абонемент и присоединяйся!</h6>
                         <?php if(isset($_SESSION['username'])):?>
-                            <a href="#" >Начни тренироваться сегодня</a>
+                            <a href="" >Купить абонемент</a>
                         <?php else:?>
-                            <a href="sign-ups.php" >Начни тренироваться сегодня</a>
+                            <a href="sign-ups.php" >Купить абонемент</a>
                         <?php endif?>    
                     </div>
-                    <div >
-                        <div>
-                            <div>
+                    <div class="col-sm">
                                 <h2 >Рабочее время</h2>
                                 <strong >Понедельник -
                                     Пятница</strong>
@@ -43,8 +41,6 @@
                                 <p >6:00 - 20:00</p>
                                 <strong>Воскресенье :
                                     Закрыто</strong>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -53,83 +49,49 @@
 
         <!-- ABOUT -->
         <section class="about" id="about">
-        <div class="container">
-                <div class="row">
-                    <div >
+            <div class="container">
+                <hr color="white">
+                <div >
+                    <div class="p-3 mb-2 ">
                         <h2 >Привет, мы - OLIMPIA!</h2>
-                        <p >В OLIMPIA мы стремимся вдохновлять и поддерживать
+                        <p>В OLIMPIA мы стремимся вдохновлять и поддерживать
                             каждого члена нашего сообщества в их стремлении к здоровью и благополучию. Независимо от
                             вашего уровня подготовки или опыта, мы предоставляем индивидуальные программы тренировок,
                             атмосферу поддержки и профессиональные тренеры, готовые помочь вам достичь ваших целей.</p>
                     </div>
-                    <div >
-                        <div >
-                            <img src="" >
-                            <div>
-                                <h3>Алексей</h3>
-                                <span>Power lifting</span>
-                                <span>Воркаут</span>
-                                <span>Кроссфит</span>
-                            </div>
-                        </div>
+                    <div class=" row p-3 mb-2 ">
+                        <?php foreach ($trainers as $trener):?>
+                                <div class="col-sm p-3 mb-10  border border-white ">
+                                    <img src="<?=htmlspecialchars($trener['Image'])?>" width="350" height="300">
+                                    <div>
+                                        <h3><?=$trener['Name']?></h3>
+                                    </div>
+                                </div>
+                            <?php endforeach?>
                     </div>
-                    <div>
-                        <div >
-                            <img src="">
-                            <div >
-                                <h3>Антон</h3>
-                                <span>Power lifting</span>
-                                <span>Бокс</span>
-                                <span>Кардио</span>
-                            </div>
-                        </div>
-                    </div>
+                        
                 </div>
             </div>
         </section>
 
         <!-- CLASS -->
         <section  id="class">
-            <div >
-                <div >
+            <div class="container">
+                <hr color="white">
+                <div class="p-3 mb-2 text-white">
                     <div>
                         <h2>Наши групповые занятия</h2>
                     </div>
-                    <div>
-                        <div>
-                            <img src="">
-                            <div>
-                                <h3>Бокс</h3>
-                                <span><strong>Тренер</strong> - Антон</span>
-                                <span>100₽</span>
-                                <p>Групповые тренировки по боксу (цена за одну тренировку)</p>
+                    <div class="row">
+                        <?php foreach ($trains as $train):?>
+                            <div class="col-sm">
+                                <img src="<?=htmlspecialchars($train['Image'])?>" width="350" height="300">
+                                <div class="border border-black">
+                                    <h3><?=$train['Type']?></h3>
+                                    <span>Стоимость: <?=$train['Price']?></span>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div >
-                            <img src="">
-                            <div>
-                                <h3>Воркаут</h3>
-                                <span><strong>Тренер</strong> - Алексей</span>
-                                <span>150₽</span>
-                                <p>Групповые занятия на турниках и брусьях (цена за одну тренировку)</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div>
-                            <img src="">
-                            <div>
-                                <h3>Кардио</h3>
-                                <span><strong>Тренер</strong> - Антон</span>
-                                <span>200₽</span>
-                                <p>Групповые занятия направленные на интенсивную работу и сброс веса (цена
-                                    за
-                                    одну
-                                    тренировку)</p>
-                            </div>
-                        </div>
+                        <?php endforeach?>
                     </div>
                 </div>
             </div>
@@ -137,16 +99,15 @@
 
         <!-- SCHEDULE -->
         <section id="schedule">
-            <div >
-                <div >
+            <div class="container">
+                <hr color="white">
+                <div class="p-3 mb-2 text-white">
                     <div >
-                        <h6 >наше расписание на неделю</h6>
-
                         <h2>Расписание зала</h2>
                     </div>
-                    <div >
-                        <table>
-                            <thead>
+                    <div class="row">
+                        <table class="col-sm border border-white p-3 mb-2">
+                            <thead class="border border-white">
                                 <th>Пн</th>
                                 <th>Вт</th>
                                 <th>Ср</th>
@@ -154,8 +115,8 @@
                                 <th>Пт</th>
                                 <th>Сб</th>
                             </thead>
-                            <tbody>
-                                <tr>
+                            <tbody >
+                                <tr class="border border-white">
                                     <td><small>7:00</small></td>
                                     <td>
                                         <strong>Кардио</strong>
@@ -173,7 +134,7 @@
                                     </td>
                                 </tr>
 
-                                <tr>
+                                <tr class="border border-white">
                                     <td><small>9:00</small></td>
                                     <td></td>
                                     <td></td>
@@ -186,13 +147,10 @@
                                         <span>8:00 - 9:00</span>
                                     </td>
                                     <td></td>
-                                    <td>
-                                        <strong>Кардио</strong>
-                                        <span>8:00 - 9:00</span>
-                                    </td>
+
                                 </tr>
 
-                                <tr>
+                                <tr class="border border-white">
                                     <td><small>11:00</small></td>
                                     <td></td>
                                     <td>
@@ -226,10 +184,7 @@
                                         <span>18:00 - 21:00</span>
                                     </td>
                                     <td></td>
-                                    <td>
-                                        <strong>Кроссфит</strong>
-                                        <span>17:00 - 19:00</span>
-                                    </td>
+
                                 </tr>
                             </tbody>
                         </table>
@@ -240,22 +195,21 @@
         </section>
         <!-- CONTACT -->
         <section id="contact">
-            <div >
-                <div >
+            <div class="container">
+                <hr color="white">
                     <div >
                         <h2 >Где нас можно найти
                         </h2>
                         <p >г.Екатеринбург
                             ул.Ульяновская 11</p>
                         <div>
-                            <iframe
+                            <iframe 
                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1496.7553428139345!2d60.628003047577764!3d56.901557459738925!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x43c172776b66c18d%3A0x8afbc3626f8e269e!2z0KPQu9GM0Y_QvdC-0LLRgdC60LDRjyDRg9C7LiwgMTE!5e0!3m2!1sru!2sru!4v1700243181254!5m2!1sru!2sru"
                                 width="600" height="400" style="border:0;" allowfullscreen="" loading="lazy"
                                 referrerpolicy="no-referrer-when-downgrade">
                             </iframe>
                         </div>
                     </div>
-                </div>
             </div>
         </section>
     </body>

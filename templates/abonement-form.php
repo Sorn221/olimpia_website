@@ -1,3 +1,6 @@
+<head>
+    <link rel="stylesheet" href="css/form.css">
+</head>
 <div class="modal fade" id="membershipForm" tabindex="-1" role="dialog" aria-labelledby="membershipFormLabel"
             aria-hidden="true">
             <div class="modal-dialog" role="document">

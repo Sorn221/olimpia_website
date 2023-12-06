@@ -57,7 +57,11 @@ body {
     margin-bottom: 20px;
 }
 
-h6 {
+h6,
+p,
+h2,
+span,
+li{
     color: black;
 }
 

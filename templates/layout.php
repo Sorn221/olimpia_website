@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/main.css">
+
     
     <!-- MAIN CSS -->
 
@@ -50,18 +51,18 @@
     </header>
     <?= $content ?>
     <footer>
-        <div>
-            <div>
-                <div>
-                    <p >Copyright &copy; 2023 URTK Co.
+        <div class="container">
+            <div class="row">
+                <div class="col-sm">
+                    <p class="text-white">Copyright &copy; 2023 URTK Co.
                         <br>Design: <a href="https://github.com/Sorn221">Sorn</a>
                     </p>
                 </div>
-                <div>
+                <div class="col-sm">
                     <p >
                         <a href="#">fomin.timofey.sistema@yandex.ru</a>
                     </p>
-                    <p> +7(922)1889024</p>
+                    <p class="text-white"> +7(922)1889024</p>
                 </div>
 
             </div>

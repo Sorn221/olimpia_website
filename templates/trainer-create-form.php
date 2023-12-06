@@ -47,6 +47,18 @@
                     <?= $errors['number'] ?>
                 </span>
             </div>
+            <div class="form__item form__item--file <?php if (isset($errors['image'])): ?> form__item--invalid <?php endif; ?> ">
+                <label>Изображение <sup>*</sup></label>
+                    <div class="form__input-file">
+                        <input class="visually-hidden" name="image" type="file" id="lot-img" value="">
+                        <label for="lot-img">
+                            Добавить
+                        </label>
+                        <span class="form__error">
+                            <?= $errors['image'] ?>
+                        </span>
+                    </div>
+            </div>
 
             <button type="submit">Зарегистрироваться</button>
         </form>

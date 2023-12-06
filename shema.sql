@@ -25,7 +25,8 @@ CREATE TABLE Trainers (
     PhoneNumber VARCHAR(15),
     TrainerLogin VARCHAR(255) UNIQUE,
     Password VARCHAR(255) UNIQUE,
-    Active BOOLEAN
+    Image varchar(200) NOT NULL ,
+    Active BOOLEAN DEFAULT true
 );
 
 -- Таблица "Тренировки"
@@ -34,6 +35,7 @@ CREATE TABLE Workouts (
     Type VARCHAR(50),
     TrainerID INT,
     Price INT,
+    Image varchar(200) NOT NULL ,
     FOREIGN KEY (TrainerID) REFERENCES Trainers(ID) ON DELETE CASCADE
 );
 

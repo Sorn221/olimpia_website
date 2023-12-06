@@ -9,7 +9,7 @@ const MAX_LOGIN = 30;
 
 //валидация формы
 $errors = [];
-$required_fields = ['email', 'password', 'name','login', 'number'];
+$required_fields = ['email', 'password', 'name','login', 'number','image'];
 if ($_SERVER['REQUEST_METHOD'] == 'POST') 
 {
     //проверка на пустые поля
@@ -55,6 +55,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST')
 
         if ($len > MAX_EMAIL) {
             $errors['login'] = "Логин должен быть меньше " . MAX_LOGIN . " символов";
+        }
+    }
+    //Обработка изображения
+    if ($_FILES) {
+        if ($_FILES['image']['tmp_name'] !== "") {
+            if (
+                (mime_content_type($_FILES['image']['tmp_name']) == "image/png") || (mime_content_type($_FILES['image']['tmp_name']) == "image/jpeg")
+                || (mime_content_type($_FILES['image']['tmp_name']) == "image/jpg")
+            ) {
+                $file_name = $_FILES['image']['name'];
+                $file_path = __DIR__ . '/uploads/';
+                $file_url = '/uploads/' . $temp . $file_name;
+                move_uploaded_file($_FILES['image']['tmp_name'], $file_path . $temp . $file_name);
+            } else {
+                $errors['image'] = "Картинка должна быть в формате *.png, *.jpeg или *.jpg";
+            }
+        } else {
+            $errors['image'] = "Добавте изображение";
         }
     }
     if (!$errors) {
