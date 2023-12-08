@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/main.css">
 
-    
+
     <!-- MAIN CSS -->
 
     <title>
@@ -34,9 +34,11 @@
                 </div>
 
                 <div>
-                    <?php if(isset($_SESSION['username'])): ?>
+                    <?php if (isset($_SESSION['username'])): ?>
                         <div>
-                            <a href="profile.php" class="logged-name"><?=htmlspecialchars($_SESSION['username'])?></a>
+                            <a href="profile.php" class="logged-name">
+                                <?= htmlspecialchars($_SESSION['username']) ?>
+                            </a>
                             <a href="logout.php" class="logged-name">Выход</a>
                         </div>
                     <?php else: ?>
@@ -49,25 +51,30 @@
             </nav>
         </div>
     </header>
-    <?= $content ?>
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm">
-                    <p class="text-white">Copyright &copy; 2023 URTK Co.
-                        <br>Design: <a href="https://github.com/Sorn221">Sorn</a>
-                    </p>
-                </div>
-                <div class="col-sm">
-                    <p >
-                        <a href="#">fomin.timofey.sistema@yandex.ru</a>
-                    </p>
-                    <p class="text-white"> +7(922)1889024</p>
-                </div>
+    <div>
+        <?= $content ?>
+    </div>
+    <div class="footer">
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm">
+                        <p class="text-white">Copyright &copy; 2023 URTK Co.
+                            <br>Design: <a href="https://github.com/Sorn221">Sorn</a>
+                        </p>
+                    </div>
+                    <div class="col-sm">
+                        <p>
+                            <a href="#">fomin.timofey.sistema@yandex.ru</a>
+                        </p>
+                        <p class="text-white"> +7(922)1889024</p>
+                    </div>
 
+                </div>
             </div>
-        </div>
-    </footer>
+        </footer>
+    </div>
+
 </body>
 
 </html>
