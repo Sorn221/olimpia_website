@@ -19,18 +19,20 @@ function getPostVal($name): string
 // -------------------------------------------------------------
 // -------------------------------------------------------------
 
-function add_client(string $name, string $email,string $login, string $password, string $contact_info,  mysqli $con): int
+function add_client(string $name, string $email, string $login, string $password, string $contact_info, mysqli $con): int
 {
     $temp_password = password_hash($password, PASSWORD_DEFAULT);
     $sql = "INSERT INTO Clients(`Name`, `Email`, `ClientLogin`, `Password`,`Contact`)
             VALUES(?,?,?,?,?);";
     $stmt = mysqli_prepare($con, $sql);
-    mysqli_stmt_bind_param($stmt, 'sssss', 
-        $name, 
+    mysqli_stmt_bind_param(
+        $stmt,
+        'sssss',
+        $name,
         $email,
-        $login, 
-        $temp_password, 
-        $contact_info  
+        $login,
+        $temp_password,
+        $contact_info
     );
     mysqli_stmt_execute($stmt);
     return $con->insert_id;
@@ -54,7 +56,8 @@ function get_clients(mysqli $con): array
  *
  * @return array данные пользователя
  */
-function get_client_by_email(mysqli $con, string $email): array {
+function get_client_by_email(mysqli $con, string $email): array
+{
     $sql = 'SELECT * FROM `Clients`
             WHERE `Email` = ?';
     $prepare_values = mysqli_prepare($con, $sql);
@@ -65,7 +68,7 @@ function get_client_by_email(mysqli $con, string $email): array {
     return mysqli_fetch_assoc(mysqli_stmt_get_result($prepare_values)) ?? [];
 }
 // абонементы для конкретного пользователя
-function get_сlient_abonement(mysqli $con, int $client_id): array 
+function get_сlient_abonement(mysqli $con, int $client_id): array
 {
     $sql = 'SELECT `ClientAbonement`.*,`Abonement`.* 
             FROM `ClientAbonement` INNER JOIN `Abonement` 
@@ -79,7 +82,7 @@ function get_сlient_abonement(mysqli $con, int $client_id): array
 
 // тренировки для конкретного пользователя
 
-function get_сlient_trainers(mysqli $con, int $client_id): array 
+function get_сlient_trainers(mysqli $con, int $client_id): array
 {
     $sql = 'SELECT `ClientWorkouts`.*,`Workouts`.*
             FROM `ClientWorkouts` INNER JOIN `Workouts` 
@@ -98,7 +101,8 @@ function get_сlient_trainers(mysqli $con, int $client_id): array
  *
  * @return array данные пользователя
  */
-function get_client_by_login(mysqli $con, string $login): array {
+function get_client_by_login(mysqli $con, string $login): array
+{
     $sql = 'SELECT * FROM `Clients`
             WHERE `ClientLogin` = ?';
     $prepare_values = mysqli_prepare($con, $sql);
@@ -125,7 +129,7 @@ function get_client_by_id(mysqli $con, int $client_id)
     mysqli_stmt_bind_param($prepare_values, 'i', $client_id);
     mysqli_stmt_execute($prepare_values);
 
-    return mysqli_fetch_assoc(mysqli_stmt_get_result($prepare_values)) ?? [];
+    return mysqli_fetch_all(mysqli_stmt_get_result($prepare_values), MYSQLI_ASSOC) ?? [];
 }
 /**
  * Добавляет в базу
@@ -136,16 +140,29 @@ function get_client_by_id(mysqli $con, int $client_id)
  *
  * @return int id добаленной покупки абонемента
  */
-function add_client_abonement(int $abonement_id, int $client_id,  mysqli $con)
+function add_client_abonement(int $abonement_id, int $client_id, mysqli $con)
 {
-    $today = date("y.m.d"); 
+    $today = date("y.m.d");
 
     $sql = "INSERT INTO `clientabonement`(`ClientID`, `AbonementID`, `PurchaseDate`)
             VALUES (?,?,?)
     ";
-    
+
     $stmt = mysqli_prepare($con, $sql);
-    mysqli_stmt_bind_param($stmt, 'iis',$client_id, $abonement_id, $today);
+    mysqli_stmt_bind_param($stmt, 'iis', $client_id, $abonement_id, $today);
+    mysqli_stmt_execute($stmt);
+    return $con->insert_id;
+}
+function add_client_trains(int $train_id, int $client_id, mysqli $con)
+{
+    $today = date("y.m.d");
+
+    $sql = "INSERT INTO `ClientWorkouts`(`ClientID`, `WorkoutsID`, `BookingDate`)
+            VALUES (?,?,?)
+    ";
+
+    $stmt = mysqli_prepare($con, $sql);
+    mysqli_stmt_bind_param($stmt, 'iis', $client_id, $train_id, $today);
     mysqli_stmt_execute($stmt);
     return $con->insert_id;
 }
@@ -174,7 +191,8 @@ function get_trainers(mysqli $con): array
  *
  * @return array данные тренера
  */
-function get_trainer_by_login(mysqli $con, string $login): array {
+function get_trainer_by_login(mysqli $con, string $login): array
+{
     $sql = 'SELECT * FROM `Trainers`
             WHERE `TrainerLogin` = ?';
     $prepare_values = mysqli_prepare($con, $sql);
@@ -214,7 +232,7 @@ function get_trener_by_id(mysqli $con, int $trener_id)
 function get_trener_trains(mysqli $con, int $trener_id)
 {
     $sql = 'SELECT * FROM `Workouts`
-            WHERE `TrainerID` = ?';    
+            WHERE `TrainerID` = ?';
     $prepare_values = mysqli_prepare($con, $sql);
 
     mysqli_stmt_bind_param($prepare_values, 'i', $trener_id);
@@ -237,7 +255,7 @@ function get_trains_story(mysqli $con, int $trener_id)
             FROM ClientWorkouts 
             JOIN Clients ON `ClientWorkouts`.`ClientID` = `Clients`.`ID`
             JOIN `Workouts` ON `ClientWorkouts`.`WorkoutID` = `Workouts`.`ID`
-            WHERE `Workouts`.`TrainerID` = ?';    
+            WHERE `Workouts`.`TrainerID` = ?';
     $prepare_values = mysqli_prepare($con, $sql);
 
     mysqli_stmt_bind_param($prepare_values, 'i', $trener_id);
@@ -269,11 +287,13 @@ function add_trener(string $name, string $email, string $number, string $login, 
     $sql = "INSERT INTO Trainers(`Name`, `Email`, `PhoneNumber`, `TrainerLogin`, `Password`, `Image`)
             VALUES(?,?,?,?,?,?);";
     $stmt = mysqli_prepare($con, $sql);
-    mysqli_stmt_bind_param($stmt, 'ssssss', 
-        $name, 
+    mysqli_stmt_bind_param(
+        $stmt,
+        'ssssss',
+        $name,
         $email,
         $number,
-        $login, 
+        $login,
         $temp_password,
         $image
     );
@@ -290,7 +310,8 @@ function add_trener(string $name, string $email, string $number, string $login, 
  *
  * @return array данные тренера
  */
-function get_trener_by_email(mysqli $con, string $email): array {
+function get_trener_by_email(mysqli $con, string $email): array
+{
     $sql = 'SELECT * FROM `Trainers`
             WHERE `Email` = ?';
     $prepare_values = mysqli_prepare($con, $sql);
@@ -314,7 +335,8 @@ function get_trener_by_email(mysqli $con, string $email): array {
  *
  * @return array данные админа
  */
-function get_admin_by_login(mysqli $con, string $login): array {
+function get_admin_by_login(mysqli $con, string $login): array
+{
     $sql = 'SELECT * FROM `Admins`
             WHERE `AdminLogin` = ?';
     $prepare_values = mysqli_prepare($con, $sql);
@@ -344,17 +366,18 @@ function get_abonements(mysqli $con): array
     return mysqli_fetch_all(mysqli_stmt_get_result($prepare_values), MYSQLI_ASSOC) ?? [];
 }
 
-
-function add_admin(string $name, string $email,string $login, string $password, mysqli $con): int
+function add_admin(string $name, string $email, string $login, string $password, mysqli $con): int
 {
     $temp_password = password_hash($password, PASSWORD_DEFAULT);
     $sql = "INSERT INTO Admins(`Name`, `Email`, `AdminLogin`, `Password`)
             VALUES(?,?,?,?);";
     $stmt = mysqli_prepare($con, $sql);
-    mysqli_stmt_bind_param($stmt, 'ssss', 
-        $name, 
+    mysqli_stmt_bind_param(
+        $stmt,
+        'ssss',
+        $name,
         $email,
-        $login, 
+        $login,
         $temp_password
     );
     mysqli_stmt_execute($stmt);
@@ -370,7 +393,8 @@ function add_admin(string $name, string $email,string $login, string $password, 
  *
  * @return array данные админа
  */
-function get_admin_by_email(mysqli $con, string $email): array {
+function get_admin_by_email(mysqli $con, string $email): array
+{
     $sql = 'SELECT * FROM `Admins`
             WHERE `Email` = ?';
     $prepare_values = mysqli_prepare($con, $sql);

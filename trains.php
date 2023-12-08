@@ -5,12 +5,12 @@ require_once('init.php');
 
 //валидация формы
 //валидация формы
-$abonements = get_abonements($con);
+$trains = get_trains($con);
 $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $required_fields = [
-        'abonement' => 'Выбирите абонемент'
+        'trains' => 'Выбирите тренировку'
     ];
 
     //проверка на пустые поля
@@ -21,13 +21,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $errors = array_filter($errors);
-    add_client_abonement(
+    add_client_trains(
         intval($_SESSION['user_id']),
-        intval($_POST['abonements']),
+        intval($_POST['trains']),
         $con
     );
 }
 
-$page_content = include_template('abonement-form.php', ['errors' => $errors, 'abonements' => $abonements]);
+$page_content = include_template('trains-form.php', ['errors' => $errors, 'trains' => $trains]);
 $layout = include_template('layout.php', ['title' => 'Создание админа', 'content' => $page_content]);
 print $layout;

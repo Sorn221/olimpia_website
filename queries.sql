@@ -2,9 +2,7 @@
 
 -- Добавление примерных данных в таблицу "Клиенты"
 INSERT INTO Clients (Name, Email, ClientLogin, Password, Contact) VALUES
-    ('Иван Иванов', 'ivan@example.com', 'ivan123', 'ivanpass', '123-456-789'),
-    ('Мария Петрова', 'maria@example.com', 'maria456', 'password123', '987-654-321'),
-    ('Алексей Сидоров', 'alex@example.com', 'alex87', 'securepass', '555-123-789');
+    ('urtt', 'urtt@urtt.ru', 'urtt', '$2y$10$0fNhZ/QWTMTtH3kqSpORneEGnVMA2BAJ7Bzgs2RTUZO6FURT0UC5a', '123-456-789')
 
 INSERT INTO Admins (Name, Email, AdminLogin, Password) VALUES 
     ('Администратор 1', 'admin1@example.com', 'admin1', '$2y$10$fxzjVzulN3oHdkAcjfmFXOdm1.c0yoP8/dPSdgnxgIi238vnm79Ia');
@@ -29,8 +27,8 @@ INSERT INTO Abonement (Type, Price, ValidDays) VALUES
 -- Добавление примерных данных в таблицу "ClientSubscriptions"
 INSERT INTO ClientAbonement (ClientID, AbonementID, PurchaseDate) VALUES
     (1, 1, '2023-11-25 14:00:00'),
-    (2, 2, '2023-11-26 10:30:00'),
-    (3, 3, '2023-11-27 16:45:00');
+    (1, 2, '2023-11-26 10:30:00'),
+    (1, 3, '2023-11-27 16:45:00');
 
 -- Добавление примерных данных в таблицу "ClientWorkouts"
 INSERT INTO ClientWorkouts (ClientID, WorkoutID, BookingDate) VALUES
