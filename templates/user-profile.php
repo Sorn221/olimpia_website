@@ -8,7 +8,7 @@
             <div class="profile">
                 <!-- Базовая информация о пользователе -->
                 <div class="profile-info">
-                    <h3>Имя:</h3>
+                    <h2>Имя:</h2>
                     <span>
                         <?= $user_name ?><span>
                             <h3>Контактная информация:</h3>
@@ -22,13 +22,16 @@
                     <h2>Ваши абонементы </h2>
                     <?php if (!empty($abonements)): ?>
                         <ul>
-                            <?php foreach($abonements as $item): ?>
+                            <?php foreach ($abonements as $item): ?>
                                 <li>
-                                    <?= $item["Type"]?> | Цена: <?= $item["Price"]?> | Действителен <?= $item["ValidDays"]?> дней | Дата покупки: <?= $item["PurchaseDate"]?>
+                                    <?= $item["Type"] ?> | Цена:
+                                    <?= $item["Price"] ?> | Действителен
+                                    <?= $item["ValidDays"] ?> дней | Дата покупки:
+                                    <?= $item["PurchaseDate"] ?>
                                 </li>
                             <?php endforeach; ?>
                         </ul>
-                    <?php else : ?>
+                    <?php else: ?>
                         <p>Вы еще не покупали абонементы</p>
                     <?php endif; ?>
                 </div>
@@ -38,13 +41,15 @@
                     <h2>Ваши тренировки </h2>
                     <?php if (!empty($abonements)): ?>
                         <ul>
-                            <?php foreach($trainers as $item): ?>
+                            <?php foreach ($trainers as $item): ?>
                                 <li>
-                                    <?= $item["Type"]?> | Цена: <?= $item["Price"]?> | Дата покупки: <?= $item["BookingDate"]?>
+                                    <?= $item["Type"] ?> | Цена:
+                                    <?= $item["Price"] ?> | Дата покупки:
+                                    <?= $item["BookingDate"] ?>
                                 </li>
                             <?php endforeach; ?>
                         </ul>
-                    <?php else : ?>
+                    <?php else: ?>
                         <p>Вы еще не покупали тренировки</p>
                     <?php endif; ?>
                 </div>

@@ -9,25 +9,18 @@ $abonements = get_abonements($con);
 $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $required_fields = [
-        'abonement' => 'Выбирите абонемент'
-    ];
 
-    //проверка на пустые поля
-    foreach ($required_fields as $key => $value) {
-        if (empty($_POST[$key])) {
-            $errors[$key] = $value;
-        }
+    if (!($_POST['$abonements'] == 0)) {
+        add_client_abonement(
+            intval($_SESSION['user_id']),
+            intval($_POST['abonements']),
+            $con
+        );
+        header('Location: /olimpia_website/index.php');
     }
 
-    $errors = array_filter($errors);
-    add_client_abonement(
-        intval($_SESSION['user_id']),
-        intval($_POST['abonements']),
-        $con
-    );
 }
 
 $page_content = include_template('abonement-form.php', ['errors' => $errors, 'abonements' => $abonements]);
-$layout = include_template('layout.php', ['title' => 'Создание админа', 'content' => $page_content]);
+$layout = include_template('layout.php', ['title' => 'Покупка абонемента', 'content' => $page_content]);
 print $layout;

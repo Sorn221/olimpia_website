@@ -96,7 +96,7 @@ function get_сlient_abonement(mysqli $con, int $client_id): array
     $sql = 'SELECT `ClientAbonement`.*,`Abonement`.* 
             FROM `ClientAbonement` INNER JOIN `Abonement` 
             ON `ClientAbonement`.`AbonementID` = `Abonement`.`ID`
-            WHERE `ID` = ?';
+            WHERE `ClientID` = ?';
     $prepare_values = mysqli_prepare($con, $sql);
     mysqli_stmt_bind_param($prepare_values, 'i', $client_id);
     mysqli_stmt_execute($prepare_values);
@@ -117,7 +117,7 @@ function get_сlient_trainers(mysqli $con, int $client_id): array
     $sql = 'SELECT `ClientWorkouts`.*,`Workouts`.*
             FROM `ClientWorkouts` INNER JOIN `Workouts` 
             ON `ClientWorkouts`.`WorkoutID` = `Workouts`.`ID`
-            WHERE `ID` = ?';
+            WHERE `ClientID` = ?';
     $prepare_values = mysqli_prepare($con, $sql);
     mysqli_stmt_bind_param($prepare_values, 'i', $client_id);
     mysqli_stmt_execute($prepare_values);
@@ -163,7 +163,7 @@ function get_client_by_id(mysqli $con, int $client_id)
     mysqli_stmt_bind_param($prepare_values, 'i', $client_id);
     mysqli_stmt_execute($prepare_values);
 
-    return mysqli_fetch_all(mysqli_stmt_get_result($prepare_values), MYSQLI_ASSOC) ?? [];
+    return mysqli_fetch_assoc(mysqli_stmt_get_result($prepare_values)) ?? [];
 }
 
 
@@ -174,20 +174,17 @@ function get_client_by_id(mysqli $con, int $client_id)
  * @param int $client_id id пользователя
  * @param int $abonement_id id абонемента
  *
- * @return int id добаленной покупки абонемента
  */
-function add_client_abonement(int $abonement_id, int $client_id, mysqli $con)
+function add_client_abonement(int $client_id, int $abonement_id, mysqli $con)
 {
-    $today = date("y.m.d");
+    $today = date("y.m.d h.m");
 
-    $sql = "INSERT INTO `clientabonement`(`ClientID`, `AbonementID`, `PurchaseDate`)
-            VALUES (?,?,?)
-    ";
+    $sql = "INSERT INTO `Clientabonement` (`ClientID`, `AbonementID`, `PurchaseDate`)
+            VALUES (?,?,?)";
 
     $stmt = mysqli_prepare($con, $sql);
     mysqli_stmt_bind_param($stmt, 'iis', $client_id, $abonement_id, $today);
     mysqli_stmt_execute($stmt);
-    return $con->insert_id;
 }
 
 /**
@@ -197,20 +194,18 @@ function add_client_abonement(int $abonement_id, int $client_id, mysqli $con)
  * @param int $client_id id пользователя
  * @param int $train_id id тренировки
  *
- * @return int id добаленной покупки тренировки
  */
-function add_client_trains(int $train_id, int $client_id, mysqli $con)
+function add_client_trains(int $client_id, int $train_id, mysqli $con)
 {
-    $today = date("y.m.d");
+    $today = date("y.m.d h.m");
 
-    $sql = "INSERT INTO `ClientWorkouts`(`ClientID`, `WorkoutsID`, `BookingDate`)
+    $sql = "INSERT INTO `ClientWorkouts`(`ClientID`, `WorkoutID`, `BookingDate`)
             VALUES (?,?,?)
     ";
 
     $stmt = mysqli_prepare($con, $sql);
     mysqli_stmt_bind_param($stmt, 'iis', $client_id, $train_id, $today);
     mysqli_stmt_execute($stmt);
-    return $con->insert_id;
 }
 
 /*-----------------------------------------
@@ -501,4 +496,57 @@ function get_abonements(mysqli $con): array
     $prepare_values = mysqli_prepare($con, $sql);
     mysqli_stmt_execute($prepare_values);
     return mysqli_fetch_all(mysqli_stmt_get_result($prepare_values), MYSQLI_ASSOC) ?? [];
+}
+
+/**
+ * Добавляет тренировку в бд
+ * @param mysqli $con подключение к базе
+ * @param string $type Название тренировки
+ * @param int $trener_id id тренера
+ * @param int $price стоимость
+ * @param string $image путь к расположению фотографии
+ *
+ * @return int id добавленной тренировки 
+ */
+function add_trains(string $type, int $trener_id, int $price, string $image, mysqli $con): int
+{
+    $sql = "INSERT INTO Workouts (`Type`, `TrainerID`, `Price`, `Image`)
+            VALUES(?,?,?,?);";
+    $stmt = mysqli_prepare($con, $sql);
+    mysqli_stmt_bind_param(
+        $stmt,
+        'siis',
+        $type,
+        $trener_id,
+        $price,
+        $image
+    );
+    mysqli_stmt_execute($stmt);
+    return $con->insert_id;
+}
+
+/**
+ * Добавляет тренировку в бд
+ * @param mysqli $con подключение к базе
+ * @param string $type Название тренировки
+ * @param int $trener_id id тренера
+ * @param int $price стоимость
+ * @param string $image путь к расположению фотографии
+ *
+ * @return int id добавленной тренировки 
+ */
+function add_abonements(string $type, int $price, int $days, mysqli $con): int
+{
+    $sql = "INSERT INTO Abonement (`Type`, `Price`, `ValidDays`)
+            VALUES(?,?,?);";
+    $stmt = mysqli_prepare($con, $sql);
+    mysqli_stmt_bind_param(
+        $stmt,
+        'sii',
+        $type,
+        $price,
+        $days
+    );
+    mysqli_stmt_execute($stmt);
+    return $con->insert_id;
 }

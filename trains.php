@@ -22,12 +22,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $errors = array_filter($errors);
     add_client_trains(
-        intval($_SESSION['user_id']),
+        $_SESSION['user_id'],
         intval($_POST['trains']),
         $con
     );
 }
 
 $page_content = include_template('trains-form.php', ['errors' => $errors, 'trains' => $trains]);
-$layout = include_template('layout.php', ['title' => 'Создание админа', 'content' => $page_content]);
+$layout = include_template('layout.php', ['title' => 'Покупка тренировки', 'content' => $page_content]);
 print $layout;

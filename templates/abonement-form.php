@@ -31,9 +31,9 @@
                         <?= $errors['abonement'] ?>
                     </span>
 
-                    <div>
+                    <div class="text-dark">
                         <label for="submit"></label>
-                        <button type="submit" class="form-control" id="submit-button" name="submit">Оплатить</button>
+                        <button type="submit" name="submit">Оплатить</button>
                     </div>
                 </form>
 

@@ -3,7 +3,7 @@
         <div class="registration-form text-dark">
             <h2>Регистрация тренера</h2>
             <form class="<?php if ($errors): ?>form--invalid<?php endif; ?>" action="trener-create.php" method="post"
-                autocomplete="off">
+                enctype="multipart/form-data" autocomplete="off">
 
                 <div class="<?php if (isset($errors['email'])): ?>form__item--invalid<?php endif; ?>">
                     <label for="email">Email: <sup>*</sup></label>
@@ -54,10 +54,7 @@
                     class="form__item form__item--file <?php if (isset($errors['image'])): ?> form__item--invalid <?php endif; ?> ">
                     <label>Изображение <sup>*</sup></label>
                     <div class="form__input-file">
-                        <input class="visually-hidden" name="image" type="file" id="lot-img" value="">
-                        <label for="lot-img">
-                            Добавить
-                        </label>
+                        <input class="visually-hidden" name="image" type="file" id="image" value="">
                         <span class="form__error">
                             <?= $errors['image'] ?>
                         </span>
