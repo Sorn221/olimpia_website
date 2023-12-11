@@ -105,7 +105,7 @@
                     </div>
                 </div>
                 <?php if (isset($_SESSION['username']) && $_SESSION['type'] == 'client'): ?>
-                    <a href="abonement.php">Купить тренировку</a>
+                    <a href="trains.php">Купить тренировку</a>
                 <?php elseif ($_SESSION['type'] == 'admin' || $_SESSION['type'] == 'trainer'): ?>
                     <a href="#">Купить тренировку</a>
                 <?php else: ?>

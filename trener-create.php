@@ -7,7 +7,7 @@ const MAX_NAME = 30;
 const MAX_EMAIL = 255;
 const MAX_LOGIN = 30;
 
-if (!isset($_SESSION['username'])) {
+if ($_SESSION['type'] != 'admin') {
     http_response_code(403);
     $page_content = include_template('403.php');
 } else {

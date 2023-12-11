@@ -20,12 +20,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    $errors = array_filter($errors);
-    add_client_trains(
-        $_SESSION['user_id'],
-        intval($_POST['trains']),
-        $con
-    );
+    if (!$errors) {
+        add_client_trains(
+            $_SESSION['user_id'],
+            intval($_POST['trains']),
+            $con
+        );
+        header('Location: /olimpia/olimpia_website/index.php');
+        exit;
+    }
+
 }
 
 $page_content = include_template('trains-form.php', ['errors' => $errors, 'trains' => $trains]);
