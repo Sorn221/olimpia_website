@@ -1,6 +1,9 @@
 /*---------------------------------------
       HEADER         
   -----------------------------------------*/
+html{
+    scroll-behavior: smooth;
+}
 body {
     font-family: 'Arial', sans-serif;
     color: #fff;
@@ -9,6 +12,7 @@ body {
         margin: 0;
         padding-bottom: 100px;
         min-height: 100vh;
+    
 }
 
 header {

@@ -26,10 +26,12 @@
                     <div class="col-sm">
                         <h2>Новичок в зале?</h2>
                         <h6>Приобретай абонемент и присоединяйся!</h6>
-                        <?php if (isset($_SESSION['username']) && $_SESSION['type'] == 'client'): ?>
-                            <a href="abonement.php">Купить абонемент</a>
-                        <?php elseif ($_SESSION['type'] == 'admin' || $_SESSION['type'] == 'trainer'): ?>
-                            <a href="#">Купить абонемент</a>
+                        <?php if (isset($_SESSION['username'])): ?>
+                            <?php if ($_SESSION['type'] == 'client'):?>
+                                <a href="abonement.php">Купить абонемент</a>
+                            <?php elseif ($_SESSION['type'] == 'admin' || $_SESSION['type'] == 'trainer'): ?>
+                                <a href="#">Купить абонемент</a>
+                            <?php endif?>
                         <?php else: ?>
                             <a href="sign-ups.php">Купить абонемент</a>
                         <?php endif ?>
@@ -104,10 +106,12 @@
 
                     </div>
                 </div>
-                <?php if (isset($_SESSION['username']) && $_SESSION['type'] == 'client'): ?>
-                    <a href="trains.php">Купить тренировку</a>
-                <?php elseif ($_SESSION['type'] == 'admin' || $_SESSION['type'] == 'trainer'): ?>
-                    <a href="#">Купить тренировку</a>
+                <?php if (isset($_SESSION['username'])): ?>
+                    <?php if($_SESSION['type'] == 'client'):?>
+                        <a href="trains.php">Купить тренировку</a>
+                    <?php elseif ($_SESSION['type'] == 'admin' || $_SESSION['type'] == 'trainer'): ?>
+                        <a href="#">Купить тренировку</a>
+                    <?php endif?>
                 <?php else: ?>
                     <a href="sign-ups.php">Купить тренировку</a>
                 <?php endif ?>

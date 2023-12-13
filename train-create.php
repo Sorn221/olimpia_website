@@ -57,6 +57,8 @@ if ($_SESSION['type'] != 'admin') {
                 $file_url,
                 $con
             );
+            header('Location: /olimpia/olimpia_website/index.php');
+            exit;
         }
     }
 

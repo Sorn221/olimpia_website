@@ -25,11 +25,11 @@
 
                 <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                     <ul class="navbar-nav">
-                        <li class="nav-item"><a class="nav-link" href="#home">Основная</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#about">О нас</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#class">Групповые занятия</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#schedule">Расписания</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#contact">Контакты</a></li>
+                        <li class="nav-item"><a class="nav-link" href="index.php#home">Основная</a></li>
+                        <li class="nav-item"><a class="nav-link" href="index.php#about">О нас</a></li>
+                        <li class="nav-item"><a class="nav-link" href="index.php#class">Групповые занятия</a></li>
+                        <li class="nav-item"><a class="nav-link" href="index.php#schedule">Расписания</a></li>
+                        <li class="nav-item"><a class="nav-link" href="index.php#contact">Контакты</a></li>
                     </ul>
                 </div>
 
